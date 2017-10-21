@@ -1,0 +1,56 @@
+Button, TextField {
+  margin-left: 6;
+  margin-right: 6;
+  margin-bottom: 10;
+}
+
+TextField {
+  padding: 12 6;
+  font-size: 15;
+}
+
+Button{
+  height: 65;
+  color: white;
+
+}
+.submit-button {
+  background-color: #27ae60;
+  margin-top: 20;
+}
+
+.faq-button{
+  background-color: #4099ff;
+}
+
+.login-entry-form{
+   margin-left: 30;
+   margin-right: 30;
+   margin-top: 20;
+}
+
+.login-entry-form-icon{
+  margin-top:12;
+  color: black;
+}
+
+.btn-outline{
+  background-color:transparent;
+  border: none;
+}
+
+.hand-image{
+  height: 200;
+}
+
+.extra-actions{
+  margin-top: 20;
+  margin-left: 20;
+  font-size: 15;
+  font-family: sans-serif;
+}
+
+.icons-extra-actions{
+  color: gray;
+  margin-top:3;
+}

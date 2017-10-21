@@ -1,0 +1,17 @@
+<WrapLayout>
+    <ScrollView>
+        <StackLayout>
+            <Image src="res://testwallpaper" stretch="none" horizontalAlignment="center" class="hand-image"></Image>
+            <StackLayout class="login-entry-form">
+                <GridLayout rows="*" columns="auto, *" height="50">
+                    <Label class="font-awesome login-entry-form-icon" text=" &#xf1e4;" row="0" col="0"></Label>
+                    <TextField row="0" col="1" hint="Access Code"  autocorrect="false" autocapitalizationType="none" [(ngModel)]="verificationcode.AccessCode"></TextField>
+                </GridLayout>
+                <ActivityIndicator [busy]="isRequesting" [visibility]="isRequesting ? 'visible' : 'collapse'" row="1" horizontalAlignment="center"
+                    verticalAlignment="center"></ActivityIndicator>
+                <Button text="&#xf090; Submit" class="submit-button font-awesome" (tap)="sendVerificationCodeCall()"></Button>
+                <!-- <Button text="&#xf059; Sign In" class="faq-button font-awesome" [nsRouterLink]="['/']" ></Button> -->
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</WrapLayout>

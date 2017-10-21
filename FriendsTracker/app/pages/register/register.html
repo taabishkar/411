@@ -1,0 +1,43 @@
+<WrapLayout>
+    <ScrollView>
+        <StackLayout>
+            <Image src="res://testwallpaper" stretch="none" horizontalAlignment="center" class="hand-image"></Image>
+            <StackLayout class="login-entry-form">
+                <GridLayout rows="*" columns="auto, *" height="50">
+                    <Label class="font-awesome login-entry-form-icon" text=" &#xf007;" row="0" col="0"></Label>
+                    <TextField row="0" col="1" hint="First Name"  autocorrect="false" autocapitalizationType="none" [(ngModel)]="registerUser.FirstName"></TextField>
+                </GridLayout>
+                <GridLayout rows="*" columns="auto, *" height="50">
+                    <Label class="font-awesome login-entry-form-icon" text=" &#xf007;" row="0" col="0"></Label>
+                    <TextField row="0" col="1" hint="Last Name"  [(ngModel)]="registerUser.LastName"></TextField>
+                </GridLayout>
+                <GridLayout rows="*" columns="auto, *" height="50">
+                    <Label class="font-awesome login-entry-form-icon" text=" &#xf095;" row="0" col="0"></Label>
+                    <TextField row="0" col="1" hint="Phone Number"  [(ngModel)]="registerUser.Mobile"></TextField>
+                </GridLayout>
+                <GridLayout rows="*" columns="auto, *" height="50">
+                    <Label class="font-awesome login-entry-form-icon" text=" &#xf007;" row="0" col="0"></Label>
+                    <TextField row="0" col="1" hint="Username" autocapitalizationType="none" [(ngModel)]="registerUser.UserName"></TextField>
+                </GridLayout>
+                <GridLayout rows="*" columns="auto, *" height="50">
+                    <Label class="font-awesome login-entry-form-icon" text=" &#xf023;" row="0" col="0"></Label>
+                    <TextField row="0" col="1" hint="Password"  secure="true" [(ngModel)]="registerUser.Password"></TextField>
+                </GridLayout>
+                <!-- <GridLayout rows="*" columns="*,*" height="50" class="extra-actions">
+                    <StackLayout orientation="horizontal" row="0" col="0">
+                        <Label class="font-awesome icons-extra-actions" text="&#xf06e; "></Label>
+                        <Label class="btn-outline" text="Forgot Credential"></Label>
+                    </StackLayout>
+                    <StackLayout orientation="horizontal" row="0" col="1">
+                        <Label class="btn-outline" text="Create Account"></Label>
+                        <Label class="font-awesome icons-extra-actions" text=" &#xf090;"></Label>
+                    </StackLayout>
+                </GridLayout> -->
+                <ActivityIndicator [busy]="isSigningUp" [visibility]="isSigningUp ? 'visible' : 'collapse'" row="1" horizontalAlignment="center"
+                    verticalAlignment="center"></ActivityIndicator>
+                <Button text="&#xf090; Register" class="submit-button font-awesome" (tap)="registerCall()"></Button>
+                <Button text="&#xf048; Sign In" class="faq-button font-awesome" [nsRouterLink]="['/']" ></Button>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</WrapLayout>

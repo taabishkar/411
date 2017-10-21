@@ -1,0 +1,50 @@
+Page {
+  background-color: white;
+  font-size: 15;
+}
+
+TextField {
+  padding: 10;
+  font-size: 15;
+}
+
+.font-awesome {
+    font-family: "FontAwesome";
+    color: white;
+}
+
+/*bottom menu item css start*/
+.bottom-menu{
+  margin-top: 442;
+}
+
+.bottom-menu-items{
+  text-align: center;
+}
+
+.bottom-menu-item{
+  text-align: center;
+  background-color: whitesmoke;
+  border-color: #e9ebee;
+  border-width: 3;
+}
+
+.bottom-menu-icons{
+  color: black;
+  margin-top: 5;
+  font-size: 25;
+  margin-bottom: 5;
+}
+/*bottom menu icons css end*/
+
+.action-bar{
+    background-color: #0190fe;
+    color: white;
+}
+
+.logout-button{
+    background-color: #0190fe;
+    border-color:transparent;
+    border-width: 1;
+    font-size: 20;
+}
