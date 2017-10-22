@@ -42,21 +42,12 @@ namespace team_origin.Contracts
             return friendship.FriendshipStatus.StatusDescription;
         }
 
-        //public bool AcceptFriendRequest(string FromUserId, string ToUserId)
-        //{
-        //    var friendship = _dbSet.Include(b => b.FriendshipStatus)
-        //         .SingleOrDefault(f => f.FromUserId == FromUserId && f.ToUserId == ToUserId
-        //         || f.ToUserId == FromUserId && f.FromUserId == ToUserId);
+        public Friendship AcceptRequest(string FromUserId, string ToUserId) {
+            var friendship = _dbSet.Include(b => b.FriendshipStatus)
+                 .SingleOrDefault(f => f.FromUserId == FromUserId && f.ToUserId == ToUserId
+                 || f.ToUserId == FromUserId && f.FromUserId == ToUserId);
 
-        //    if (friendship != null && friendship.FriendshipStatusId==0) {
-
-        //        //considering 1 is for accepted friendship.
-        //        friendship.FriendshipStatusId = 1;
-
-        //    }
-
-        //}
-
-
+            return friendship;
+        }
     }
 }

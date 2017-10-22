@@ -15,15 +15,18 @@ namespace team_origin.Controllers
     {
         private readonly IRepository<User> _userRepo;
         private readonly IFriendshipRepository _friendshipRepo;
+        private readonly IRepository<Friendship> _friendshipRepository;
 
         public FriendsController(
             IRepository<User> userRepo,
-            IFriendshipRepository friendshipRepo
+            IFriendshipRepository friendshipRepo,
+            IRepository<Friendship> friendshipRepository
            )
         {
 
             _userRepo = userRepo;
             _friendshipRepo = friendshipRepo;
+            _friendshipRepository = friendshipRepository;
         }
 
         //Search your friend by phone number
@@ -59,13 +62,13 @@ namespace team_origin.Controllers
             }
         }
 
-        //Search your friend by phone number
+        
         [HttpPost("addfriend")]
-        public IActionResult AddFriend([FromBody] AddFriendViewModel addFriendsViewModel)
+        public IActionResult AddFriend([FromBody] FriendRequestViewModel friendRequestVieModel)
         {
             try
             {
-                var checkSuccess = _friendshipRepo.AddFriend(addFriendsViewModel.FromUserId, addFriendsViewModel.ToUserId);
+                var checkSuccess = _friendshipRepo.AddFriend(friendRequestVieModel.FromUserId, friendRequestVieModel.ToUserId);
                 if (checkSuccess)
                 {
                     return Ok(true);
@@ -76,6 +79,22 @@ namespace team_origin.Controllers
             }
             catch (Exception e)
             {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("acceptFriendRequest")]
+        public IActionResult AcceptFriendRequeust([FromBody] FriendRequestViewModel friendRequestVieModel)
+        {
+            var friendship = _friendshipRepo.AcceptRequest(friendRequestVieModel.FromUserId, friendRequestVieModel.ToUserId);
+
+            if (friendship != null)
+            {
+                friendship.FriendshipStatusId = 1;
+                _friendshipRepository.Update(friendship);
+                return Ok(true);
+            }
+            else {
                 return BadRequest();
             }
         }
