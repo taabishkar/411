@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using team_origin.Contracts;
 using team_origin.Entities;
+using team_origin.Results;
 using team_origin.Services;
 using team_origin.ViewModels;
 
@@ -71,7 +72,12 @@ namespace team_origin.Controllers
 
             _verificationCodeRepo.Add(verificationCodeToBeSaved);
 
-            return Ok();
+            var returnUser = new UserResult
+            {
+                Id = savedUser.Id
+            };
+
+            return Ok(returnUser);
 
         }
 
@@ -117,7 +123,7 @@ namespace team_origin.Controllers
               expires: DateTime.Now.AddMinutes(30),
               signingCredentials: creds);
 
-            return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+            return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token)});
         }
     }
 }

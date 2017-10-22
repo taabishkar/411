@@ -68,6 +68,7 @@ namespace team_origin
             .AddDefaultTokenProviders();
 
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IFriendshipRepository, FriendshipRespository>();
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
