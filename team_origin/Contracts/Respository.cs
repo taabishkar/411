@@ -22,14 +22,7 @@ namespace team_origin.Contracts
             _dbSet = _dbContext.Set<T>();
         }
 
-        ///// <summary>
-        ///// Initialize a new repository with default dbContext (CloudGavelContext). 
-        ///// </summary>
-        //public Repository(DbContext context)
-        //{
-        //    _dbContext = new FusionstakContext();
-        //    _dbSet = _dbContext.Set<T>();
-        //}
+        
 
         /// <summary>
         /// Gets all entities T where predicate returns true.

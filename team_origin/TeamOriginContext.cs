@@ -8,6 +8,8 @@ namespace team_origin
     public class TeamOriginContext: IdentityDbContext<User>
     {
         public DbSet<VerificationCode> VerificationCode { get; set; }
+        public DbSet<Friendship> Friendship { get; set; }
+        public DbSet<FriendshipStatus> FriendshipStatus { get; set; }
 
         public TeamOriginContext(DbContextOptions<TeamOriginContext> options)
             : base(options)
@@ -115,6 +117,41 @@ namespace team_origin
                       .WithOne(u => u.VerificationCode)
                       .HasForeignKey<VerificationCode>(u => u.UserId);
             });
+
+            //modelBuilder for Friendship status table
+            modelBuilder
+                .Entity<FriendshipStatus>(entity =>
+                {
+                    entity.HasKey(fs => fs.StatusId);
+
+                    entity.Property(fs => fs.StatusId)
+                          .ValueGeneratedOnAdd();
+                    entity.Property(fs=>fs.StatusDescription)
+                          .HasMaxLength(50);
+                });
+
+            //modelBuilder for Friendship table
+            modelBuilder
+                .Entity<Friendship>(entity =>
+                {
+                    entity.HasKey(f => f.FrienshipId);
+
+                    entity.Property(f => f.FrienshipId)
+                          .ValueGeneratedOnAdd();
+
+                    entity.HasOne(f => f.FromUser)
+                        .WithMany(u => u.FromUserFriendship)
+                        .HasForeignKey(f => f.FromUserId);
+
+                    entity.HasOne(f => f.ToUser)
+                        .WithMany(u => u.ToUserFriendship)
+                        .HasForeignKey(f => f.ToUserId);
+
+                    entity.HasOne(f => f.FriendshipStatus)
+                    .WithMany(fs => fs.Friendship)
+                    .HasForeignKey(f => f.FriendshipStatusId)
+                    .IsRequired();
+                });
         }
     }
 }
