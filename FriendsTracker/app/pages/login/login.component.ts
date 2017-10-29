@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     isSigningIn: boolean = false;
     ngOnInit() {
         if (Config.token != "") {
-            this.routerExtensions.navigate(["/patients-list"], { clearHistory: true });
+            this.routerExtensions.navigate(["/dashboard"], { clearHistory: true });
         }
         this.page.actionBarHidden = true;
     }
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
             .subscribe(
             () => {
                 this.isSigningIn = false;
-                this.routerExtensions.navigate(["/patients-list"], { clearHistory: true });
+                this.routerExtensions.navigate(["/dashboard"], { clearHistory: true });
             },
             (error) => {
                 this.isSigningIn = false;

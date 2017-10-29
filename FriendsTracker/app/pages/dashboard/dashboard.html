@@ -1,0 +1,40 @@
+<!-- <ActionBar title="SideDrawer Button">
+    <android>
+      <NavigationButton icon="res://ic_menu" tap="showSlideout" />
+    </android>
+    <ios>
+      <ActionItem icon="res://ic_menu" ios.position="left" tap="showSideDrawer" />
+    </ios>
+  </ActionBar> -->
+
+<ActionBar>
+  <label class="font-awesome" text="&#xf0c9;" (tap)="tapped()"></label>
+</ActionBar>
+<WrapLayout>
+  <ScrollView>
+    <StackLayout>               
+            <label text="Current Mood:"></label>
+            <label text="{{mood}}" class="mood-view"></label>
+            <Button text="Edit Mood" (tap)="editMood()" class=""></Button>
+            <StackLayout *ngIf="editClicked">
+                <label text="Current Mood:"></label>
+                <TextView hint="I'm feeling..." [(ngModel)]="userMood.moodDescription"></TextView>
+                <Button text="Update Mood" class="update-mood" (tap)="setMood()"></Button>
+              </StackLayout>          
+        <Image src="res://testwallpaper" stretch="none" horizontalAlignment="center" class="profile-image"></Image>
+        <label text="User: Rahul Shrestha" horizontalAlignment="center" class="friend-name"></label>
+        <label text="Phone Number: 9859566582" horizontalAlignment="center" class="friend-name"></label>      
+      
+    </StackLayout>
+  </ScrollView>
+</WrapLayout>
+<StackLayout class="side-drawer" *ngIf="isTapped">
+  <label class="menu-list" text="Home">
+      </label>
+  <label class="menu-list" text="Search Friends" [nsRouterLink]="['/search-page']">
+      </label>
+  <label class="menu-list" text="Friends List">
+      </label>
+  <label class="menu-list" text="Schedule">
+      </label>
+</StackLayout>

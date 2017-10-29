@@ -103,7 +103,15 @@ namespace team_origin.Controllers
               expires: DateTime.Now.AddMinutes(30),
               signingCredentials: creds);
 
-            return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token) });
+            var savedUser = await _userManager.FindByNameAsync(loginViewModel.UserName);
+
+            var userResult = new LoginUserResult
+            {
+                Id = savedUser.Id,
+                Token = new JwtSecurityTokenHandler().WriteToken(token)
+            };
+
+            return Ok(userResult);
         }
 
         [HttpPost("validateAccessCode")]
@@ -123,7 +131,14 @@ namespace team_origin.Controllers
               expires: DateTime.Now.AddMinutes(30),
               signingCredentials: creds);
 
-            return Ok(new { token = new JwtSecurityTokenHandler().WriteToken(token)});
+            var userResult = new LoginUserResult
+            {
+                Id = userFromDatabase.Id,
+                Token = new JwtSecurityTokenHandler().WriteToken(token)
+            };
+
+            return Ok(userResult);
+
         }
     }
 }

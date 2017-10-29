@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
                 console.log(error);
                 dialogs.alert({
                     title: "Error",
-                    message: "An error was encountered while registering you. Please tyr again.",
+                    message: "An error was encountered while registering you. Please try again.",
                     okButtonText: "Ok"
                 }).then(() => {
                     console.log("Dialog closed!");

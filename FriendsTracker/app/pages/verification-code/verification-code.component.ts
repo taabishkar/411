@@ -40,7 +40,7 @@ export class VerificationCodeComponent implements OnInit {
             .subscribe(
             () => {
                 this.isRequesting = false;
-                 this.routerExtensions.navigate(["/patients-list"], { clearHistory: true });
+                 this.routerExtensions.navigate(["/dashboard"], { clearHistory: true });
             },
             (error) => {
                 this.isRequesting = false;

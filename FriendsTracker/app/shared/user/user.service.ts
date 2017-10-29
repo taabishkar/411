@@ -19,14 +19,18 @@ export class UserService {
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
         let body = user;
+        console.log(Config.apiUrl);
+        console.log("Hello");
         return this.http.post(
             Config.apiUrl + 'account/login',
             body
         )
             .map((res: Response) => res.json())
             .do(data => {
-                Config.token = data.Token;
+                Config.token = data.token;
                 console.log(Config.token);
+                Config.fromUserId = data.id;
+                console.log(Config.fromUserId);
             })
             .catch(this.handleErrors);
     }
@@ -56,12 +60,16 @@ export class UserService {
     )
     .map((res: Response)  => res.json())
     .do(data => {
+        console.dir(data);
         Config.token = data.token;
         console.log(Config.token);
+        Config.fromUserId = data.id;
+        console.log(Config.fromUserId);        
     })
     .catch(this.handleErrors);
 }
     handleErrors(error: Response) {
+        console.log("Error Occured");
         console.log(error);
         return Observable.throw(error);
     }

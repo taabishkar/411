@@ -26,6 +26,7 @@
     "nativescript-accordion": "^4.0.1",
     "nativescript-angular": "~3.0.0",
     "nativescript-drop-down": "^3.1.1",
+    "nativescript-sidedrawer": "^1.0.6",
     "nativescript-theme-core": "~1.0.4",
     "reflect-metadata": "~0.1.8",
     "rxjs": "~5.2.0",

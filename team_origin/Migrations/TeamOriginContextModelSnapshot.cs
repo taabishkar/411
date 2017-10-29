@@ -170,6 +170,27 @@ namespace team_origin.Migrations
                     b.ToTable("FriendshipStatus");
                 });
 
+            modelBuilder.Entity("team_origin.Entities.Mood", b =>
+                {
+                    b.Property<int>("MoodId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<string>("MoodDescription")
+                        .HasMaxLength(140);
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("MoodId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
+
+                    b.ToTable("Mood");
+                });
+
             modelBuilder.Entity("team_origin.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -305,6 +326,13 @@ namespace team_origin.Migrations
                     b.HasOne("team_origin.Entities.User", "ToUser")
                         .WithMany("ToUserFriendship")
                         .HasForeignKey("ToUserId");
+                });
+
+            modelBuilder.Entity("team_origin.Entities.Mood", b =>
+                {
+                    b.HasOne("team_origin.Entities.User", "User")
+                        .WithOne("Mood")
+                        .HasForeignKey("team_origin.Entities.Mood", "UserId");
                 });
 
             modelBuilder.Entity("team_origin.Entities.VerificationCode", b =>

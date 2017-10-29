@@ -11,6 +11,7 @@ namespace team_origin
         public DbSet<Friendship> Friendship { get; set; }
         public DbSet<FriendshipStatus> FriendshipStatus { get; set; }
 
+        public DbSet<Mood> Mood { get; set; }
         public TeamOriginContext(DbContextOptions<TeamOriginContext> options)
             : base(options)
         {
@@ -151,6 +152,23 @@ namespace team_origin
                     .WithMany(fs => fs.Friendship)
                     .HasForeignKey(f => f.FriendshipStatusId)
                     .IsRequired();
+                });
+
+            //For the User's Mood
+            modelBuilder
+                .Entity<Mood>(entity =>
+                {
+                    entity.HasKey(m => m.MoodId);
+
+                    entity.Property(m => m.MoodId)
+                          .ValueGeneratedOnAdd();
+
+                    entity.HasOne(m => m.User)
+                          .WithOne(u => u.Mood)
+                          .HasForeignKey<Mood>(u => u.UserId);
+
+                    entity.Property(m => m.MoodDescription)
+                        .HasMaxLength(140);
                 });
         }
     }

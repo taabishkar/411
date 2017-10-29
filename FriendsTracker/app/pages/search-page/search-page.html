@@ -1,0 +1,48 @@
+<<<<<<< HEAD
+<ActionBar title="Search">
+</ActionBar>
+<WrapLayout>
+    <ScrollView>
+        <StackLayout>
+            <GridLayout rows="*" columns="auto, *" height="50">
+                <Label class="font-awesome login-entry-form-icon" text=" &#xf007;" row="0" col="0"></Label>
+                <TextField row="0" col="1" hint="Search using phone number" keyboardType="email" autocorrect="false" autocapitalizationType="none"
+                    [(ngModel)]="searchfriends.PhoneNumber"></TextField>
+            </GridLayout>
+            <Button text="Search" class="submit-button" (tap)="searchFriendsCall()"></Button>
+            <ActivityIndicator [busy]="isWorking" [visibility]="isWorking ? 'visible' : 'collapse'" row="1" horizontalAlignment="center"
+                verticalAlignment="center"></ActivityIndicator>
+            <StackLayout *ngIf="responseReceived">
+                <Image src="res://testwallpaper" stretch="none" horizontalAlignment="center" class="profile-image"></Image>
+                <Label text="{{fullname}}" horizontalAlignment="center" class="friend-name"></Label>
+                <label text="{{searchFriendsResponse.userName}}" horizontalAlignment="center" class="username"></label>
+                <label text="{{searchFriendsResponse.phoneNumber}}" horizontalAlignment="center" class="phone-number"></label>
+                <label *ngIf="searchFriendsResponse.friendhipStatus!=='Not Friends'" text="{{searchFriendsResponse.friendhipStatus}}" horizontalAlignment="center"
+                    class="status"></label>
+                <Button *ngIf="searchFriendsResponse.friendhipStatus==='Not Friends'" text="Add Friend" (tap)="addFriendCall()" class="submit-button"></Button>
+            </StackLayout>
+        </StackLayout>
+
+=======
+<WrapLayout>
+    <ScrollView>
+            <StackLayout>
+                <GridLayout rows="*" columns="auto, *" height="50">
+                    <Label class="font-awesome login-entry-form-icon" text=" &#xf007;" row="0" col="0"></Label>
+                    <TextField row="0" col="1" hint="Search using phone number" keyboardType="email" autocorrect="false" autocapitalizationType="none"></TextField>
+                </GridLayout>
+                <Button text="Search"></Button>
+                    <Image src="res://testwallpaper" stretch="none" horizontalAlignment="center" class="profile-image"></Image>
+                <!--<Label>{{object.name}}</Label>-->
+                <Label text="Shreya Thapa" horizontalAlignment="center" class="friend-name"></Label>
+                <label text="username" horizontalAlignment="center" class="username"></label>
+                <label text="985 549 4545" horizontalAlignment="center" class="phone-number"></label>
+                <label text="bio: I'm a hot gal!'" horizontalAlignment="center" class="bio"></label>
+                <label text="Friend" horizontalAlignment="center" class="status"></label>
+                <!--if status != friends, show button asking to "Add Friend"-->
+
+            </StackLayout>
+            
+>>>>>>> 3b7d48ae254c66558ed12afcad1f5e41b85691d8
+    </ScrollView>
+</WrapLayout>

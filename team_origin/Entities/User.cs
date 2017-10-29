@@ -10,6 +10,7 @@ namespace team_origin.Entities
         public VerificationCode VerificationCode { get; set; }
         public ICollection<Friendship> ToUserFriendship { get; set; }
         public ICollection<Friendship> FromUserFriendship { get; set; }
+        public Mood Mood { get; set; }
 
     }
 }
