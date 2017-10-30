@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 import { AddFriend } from './../../shared/friends/add-friend';
 import { SearchFriendsResponse } from './../../shared/friends/search-friends-response';
 
 import { FriendService } from './../../shared/friends/friend.service';
 import { SearchFriends } from './../../shared/friends/search-friends';
-=======
->>>>>>> 3b7d48ae254c66558ed12afcad1f5e41b85691d8
 import { UserService } from './../../shared/user/user.service';
 import { RegisterUser } from './../../shared/user/registerUser';
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
@@ -17,17 +14,12 @@ import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "search-page",
-<<<<<<< HEAD
     providers: [FriendService],
-=======
-    providers: [UserService],
->>>>>>> 3b7d48ae254c66558ed12afcad1f5e41b85691d8
     templateUrl: "pages/search-page/search-page.html",
     styleUrls: ["pages/search-page/search-page-common.css"]
 })
 
 export class SearchPageComponent implements OnInit {
-<<<<<<< HEAD
     public searchfriends = new SearchFriends();
     public searchFriendsResponse = new SearchFriendsResponse();
     public fullname: string;
@@ -113,9 +105,4 @@ export class SearchPageComponent implements OnInit {
         }
     
 
-=======
-    ngOnInit(){
-
-    }
->>>>>>> 3b7d48ae254c66558ed12afcad1f5e41b85691d8
 }

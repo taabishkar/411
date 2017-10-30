@@ -1,5 +1,4 @@
 import { DashBoardComponent } from './pages/dashboard/dashboard.component';
-import { SearchPageComponent } from './pages/search-page/search-page.component';
 import { VerificationCodeComponent } from './pages/verification-code/verification-code.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { NgModule } from "@angular/core";
@@ -32,12 +31,8 @@ import { SearchPageComponent } from "./pages/search-page/search-page.component";
     LoginComponent,
     RegisterComponent,
     VerificationCodeComponent,
-<<<<<<< HEAD
     SearchPageComponent,
     DashBoardComponent
-=======
-    SearchPageComponent
->>>>>>> 3b7d48ae254c66558ed12afcad1f5e41b85691d8
   ],
 
   bootstrap: [
