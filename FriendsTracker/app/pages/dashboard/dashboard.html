@@ -22,8 +22,8 @@
                 <Button text="Update Mood" class="update-mood" (tap)="setMood()"></Button>
               </StackLayout>          
         <Image src="res://testwallpaper" stretch="none" horizontalAlignment="center" class="profile-image"></Image>
-        <label text="User: Rahul Shrestha" horizontalAlignment="center" class="friend-name"></label>
-        <label text="Phone Number: 9859566582" horizontalAlignment="center" class="friend-name"></label>      
+        <label text="Username: {{dashboardItem.firstname + dashboardItem.lastname}}" horizontalAlignment="center" class="friend-name"></label>
+        <label text="Phone Number: {{dashboardItem.phonenumber}}" horizontalAlignment="center" class="friend-name"></label>      
       
     </StackLayout>
   </ScrollView>
@@ -37,4 +37,5 @@
       </label>
   <label class="menu-list" text="Schedule">
       </label>
+  <label class="menu-list" text="Sign Out" (tap)="SignOut()"></label>
 </StackLayout>

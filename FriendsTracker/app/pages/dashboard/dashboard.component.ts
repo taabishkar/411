@@ -1,3 +1,4 @@
+import { DashboardItems } from './../../shared/dashboard/dashboard';
 import { MoodService } from './../../shared/user/mood.service';
 import { UserMood } from './../../shared/user/userMood';
 import { UserService } from './../../shared/user/user.service';
@@ -7,7 +8,7 @@ import { Page } from "ui/page";
 import { Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { Config } from "../../shared/config";
-import * as dialogs from "ui/dialogs";
+import * as dialogs from 'ui/dialogs';
 
 @Component({
     selector: "dashboard",
@@ -21,15 +22,22 @@ export class DashBoardComponent implements OnInit {
     public userMood = new UserMood();
     public editClicked: boolean;
     public mood: string;
+    public username: string;
+    public firstname: string;
+    public lastname: string;
+    public phonenumber: string;
+    public dashboardItem = new DashboardItems();
 
     constructor(private moodService: MoodService, private router: Router, private routerExtensions: RouterExtensions) {
         this.userMood = new UserMood();
         this.editClicked = false;
+        this.dashboardItem = new DashboardItems();
     }
 
     ngOnInit(){
       this.getMood(); 
       this.editClicked = false;
+      this.setDashBoardData();
     }
     tapped(){
         console.log("Hamburger tapped");
@@ -83,6 +91,24 @@ export class DashBoardComponent implements OnInit {
 
     editMood(){
         this.editClicked = true;
+    }
+
+    setDashBoardData(){
+        this.dashboardItem.firstname = Config.firstName;
+        this.dashboardItem.lastname = Config.lastName;
+        this.dashboardItem.phonenumber = Config.phoneNumber;
+        this.dashboardItem.username = Config.userName;
+    }
+
+    SignOut(){
+        Config.token = "";
+        Config.userName ="";
+        Config.phoneNumber ="";
+        Config.firstName ="";
+        Config.lastName="";
+        Config.fromUserId="";
+        Config.toUserId="";
+        this.routerExtensions.navigate([""], { clearHistory: true });
     }
 
 }

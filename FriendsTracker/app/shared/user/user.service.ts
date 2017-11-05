@@ -27,17 +27,21 @@ export class UserService {
         )
             .map((res: Response) => res.json())
             .do(data => {
+                console.log(data);
                 Config.token = data.token;
-                console.log(Config.token);
                 Config.fromUserId = data.id;
-                console.log(Config.fromUserId);
+                Config.userName = data.userName;
+                Config.firstName = data.firstName;
+                Config.lastName = data.lastName;
+                Config.phoneNumber = data.phoneNumber;
+                console.log(Config.phoneNumber);
             })
             .catch(this.handleErrors);
     }
     
     register(user: RegisterUser){
             console.dir(user);
-            Config.UserName = user.UserName;
+            Config.userName = user.UserName;
             console.log(Config.apiUrl);
             let headers = new Headers();
             headers.append("Content-Type", "application/json");
@@ -51,7 +55,7 @@ export class UserService {
     sendVerificationCode(verificationCode: VerificationCode){
         console.dir(verificationCode);
         console.log(Config.apiUrl);
-        verificationCode.UserName = Config.UserName;
+        verificationCode.UserName = Config.userName;
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
         let body = verificationCode;

@@ -108,7 +108,11 @@ namespace team_origin.Controllers
             var userResult = new LoginUserResult
             {
                 Id = savedUser.Id,
-                Token = new JwtSecurityTokenHandler().WriteToken(token)
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                FirstName = savedUser.FirstName,
+                LastName = savedUser.LastName,
+                UserName = savedUser.UserName,
+                PhoneNumber = savedUser.PhoneNumber
             };
 
             return Ok(userResult);
