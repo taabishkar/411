@@ -1,17 +1,22 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using team_origin.Entities;
+using team_origin.Entities.Notifications;
 
 namespace team_origin
 {
     public class TeamOriginContext: IdentityDbContext<User>
     {
+        public DbSet<UserNotificationRef> UserNotificationRef { get; set; }
         public DbSet<VerificationCode> VerificationCode { get; set; }
         public DbSet<Friendship> Friendship { get; set; }
         public DbSet<FriendshipStatus> FriendshipStatus { get; set; }
 
         public DbSet<Mood> Mood { get; set; }
+        public DbSet<Notification> Notification { get; set; }
+        public DbSet<NotificationType> NotificationType { get; set; }
         public TeamOriginContext(DbContextOptions<TeamOriginContext> options)
             : base(options)
         {
@@ -170,6 +175,47 @@ namespace team_origin
                     entity.Property(m => m.MoodDescription)
                         .HasMaxLength(140);
                 });
+            #region Notification
+            //For NotificationType Table
+            modelBuilder
+                .Entity<NotificationType>(entity =>
+                {
+                    entity.HasKey(nt => nt.NotificationTypeId);
+                    entity.Property(nt => nt.NotificationTypeId)
+                    .ValueGeneratedOnAdd();
+                    entity.Property(nt => nt.NotificationTypeDescription)
+                    .HasMaxLength(200);
+                });
+
+            //For NotificationTable
+            modelBuilder
+                .Entity<Notification>(entity => 
+                {
+                    entity.HasKey(n => n.NotificationId);
+                    entity.Property(n => n.NotificationId)
+                    .ValueGeneratedOnAdd();
+                    entity.HasOne(n => n.NotificationType)
+                    .WithMany(nt => nt.Notification)
+                    .HasForeignKey(n => n.NotificationTypeId);
+                    entity.HasOne(u => u.User)
+                    .WithMany(n => n.Notification)
+                    .HasForeignKey(n => n.CreatedBy);
+                });
+            //For UserNotificationRef Table
+            modelBuilder
+                .Entity<UserNotificationRef>(entity =>
+                {
+                    entity.HasKey(nr => nr.UserNotificationRefId);
+                    entity.Property(nr => nr.UserNotificationRefId)
+                    .ValueGeneratedOnAdd();
+                    entity.HasOne(u => u.User)
+                    .WithMany(nr => nr.UserNotificationRef)
+                    .HasForeignKey(nr => nr.RecipientUserId);
+                    entity.HasOne(n => n.Notification)
+                    .WithOne(nr => nr.UserNotificationRef)
+                    .HasForeignKey<UserNotificationRef>(nr => nr.NotificationId);
+                });
+#endregion Notification
         }
     }
 }

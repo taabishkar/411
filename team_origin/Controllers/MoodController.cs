@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using team_origin.Entities;
 using team_origin.Contracts;
 using team_origin.ViewModels;
+using team_origin.Entities.Notifications;
 
 namespace team_origin.Controllers
 {

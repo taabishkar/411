@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using team_origin.Contracts;
 using team_origin.Entities;
+using team_origin.Entities.Notifications;
 using team_origin.Results;
 using team_origin.ViewModels;
 
@@ -71,6 +72,7 @@ namespace team_origin.Controllers
                 var checkSuccess = _friendshipRepo.AddFriend(friendRequestVieModel.FromUserId, friendRequestVieModel.ToUserId);
                 if (checkSuccess)
                 {
+                    //Create a notification and send it to the other party
                     return Ok(true);
                 }
                 else {

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using team_origin.Contracts;
 using team_origin.Entities;
+using team_origin.Entities.Notifications;
 using team_origin.Results;
 using team_origin.Services;
 using team_origin.ViewModels;

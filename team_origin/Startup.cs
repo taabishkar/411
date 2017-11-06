@@ -9,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using team_origin.Contracts;
 using team_origin.Entities;
+using team_origin.Entities.Notifications;
 using team_origin.Services;
 
 namespace team_origin

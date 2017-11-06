@@ -191,7 +191,44 @@ namespace team_origin.Migrations
                     b.ToTable("Mood");
                 });
 
-            modelBuilder.Entity("team_origin.Entities.User", b =>
+            modelBuilder.Entity("team_origin.Entities.Notifications.Notification", b =>
+                {
+                    b.Property<int>("NotificationId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedDateTime");
+
+                    b.Property<bool>("NotificationAcknowledged");
+
+                    b.Property<string>("NotificationDetails");
+
+                    b.Property<int>("NotificationTypeId");
+
+                    b.HasKey("NotificationId");
+
+                    b.HasIndex("CreatedBy");
+
+                    b.HasIndex("NotificationTypeId");
+
+                    b.ToTable("Notification");
+                });
+
+            modelBuilder.Entity("team_origin.Entities.Notifications.NotificationType", b =>
+                {
+                    b.Property<int>("NotificationTypeId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("NotificationTypeDescription")
+                        .HasMaxLength(200);
+
+                    b.HasKey("NotificationTypeId");
+
+                    b.ToTable("NotificationType");
+                });
+
+            modelBuilder.Entity("team_origin.Entities.Notifications.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -247,6 +284,25 @@ namespace team_origin.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("team_origin.Entities.Notifications.UserNotificationRef", b =>
+                {
+                    b.Property<int>("UserNotificationRefId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("NotificationId");
+
+                    b.Property<string>("RecipientUserId");
+
+                    b.HasKey("UserNotificationRefId");
+
+                    b.HasIndex("NotificationId")
+                        .IsUnique();
+
+                    b.HasIndex("RecipientUserId");
+
+                    b.ToTable("UserNotificationRef");
+                });
+
             modelBuilder.Entity("team_origin.Entities.VerificationCode", b =>
                 {
                     b.Property<int>("Id")
@@ -277,7 +333,7 @@ namespace team_origin.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("team_origin.Entities.User")
+                    b.HasOne("team_origin.Entities.Notifications.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -285,7 +341,7 @@ namespace team_origin.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("team_origin.Entities.User")
+                    b.HasOne("team_origin.Entities.Notifications.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -298,7 +354,7 @@ namespace team_origin.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("team_origin.Entities.User")
+                    b.HasOne("team_origin.Entities.Notifications.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -306,7 +362,7 @@ namespace team_origin.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("team_origin.Entities.User")
+                    b.HasOne("team_origin.Entities.Notifications.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -319,25 +375,49 @@ namespace team_origin.Migrations
                         .HasForeignKey("FriendshipStatusId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("team_origin.Entities.User", "FromUser")
+                    b.HasOne("team_origin.Entities.Notifications.User", "FromUser")
                         .WithMany("FromUserFriendship")
                         .HasForeignKey("FromUserId");
 
-                    b.HasOne("team_origin.Entities.User", "ToUser")
+                    b.HasOne("team_origin.Entities.Notifications.User", "ToUser")
                         .WithMany("ToUserFriendship")
                         .HasForeignKey("ToUserId");
                 });
 
             modelBuilder.Entity("team_origin.Entities.Mood", b =>
                 {
-                    b.HasOne("team_origin.Entities.User", "User")
+                    b.HasOne("team_origin.Entities.Notifications.User", "User")
                         .WithOne("Mood")
                         .HasForeignKey("team_origin.Entities.Mood", "UserId");
                 });
 
+            modelBuilder.Entity("team_origin.Entities.Notifications.Notification", b =>
+                {
+                    b.HasOne("team_origin.Entities.Notifications.User", "User")
+                        .WithMany("Notification")
+                        .HasForeignKey("CreatedBy");
+
+                    b.HasOne("team_origin.Entities.Notifications.NotificationType", "NotificationType")
+                        .WithMany("Notification")
+                        .HasForeignKey("NotificationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("team_origin.Entities.Notifications.UserNotificationRef", b =>
+                {
+                    b.HasOne("team_origin.Entities.Notifications.Notification", "Notification")
+                        .WithOne("UserNotificationRef")
+                        .HasForeignKey("team_origin.Entities.Notifications.UserNotificationRef", "NotificationId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("team_origin.Entities.Notifications.User", "User")
+                        .WithMany("UserNotificationRef")
+                        .HasForeignKey("RecipientUserId");
+                });
+
             modelBuilder.Entity("team_origin.Entities.VerificationCode", b =>
                 {
-                    b.HasOne("team_origin.Entities.User", "User")
+                    b.HasOne("team_origin.Entities.Notifications.User", "User")
                         .WithOne("VerificationCode")
                         .HasForeignKey("team_origin.Entities.VerificationCode", "UserId");
                 });
