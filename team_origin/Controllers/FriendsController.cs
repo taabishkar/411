@@ -4,6 +4,7 @@ using System.Linq;
 using team_origin.Contracts;
 using team_origin.Entities;
 using team_origin.Entities.Notifications;
+using team_origin.Enums;
 using team_origin.Results;
 using team_origin.ViewModels;
 
@@ -17,17 +18,23 @@ namespace team_origin.Controllers
         private readonly IRepository<User> _userRepo;
         private readonly IFriendshipRepository _friendshipRepo;
         private readonly IRepository<Friendship> _friendshipRepository;
+        private readonly IRepository<Notification> _notificationRespository;
+        private readonly IRepository<UserNotificationRef> _userNotificationRef;
 
         public FriendsController(
             IRepository<User> userRepo,
             IFriendshipRepository friendshipRepo,
-            IRepository<Friendship> friendshipRepository
+            IRepository<Friendship> friendshipRepository,
+            IRepository<Notification> notificationRespository,
+            IRepository<UserNotificationRef> usernotificationRefRepository
            )
         {
 
             _userRepo = userRepo;
             _friendshipRepo = friendshipRepo;
             _friendshipRepository = friendshipRepository;
+            _notificationRespository = notificationRespository;
+            _userNotificationRef = usernotificationRefRepository;
         }
 
         //Search your friend by phone number
@@ -72,7 +79,29 @@ namespace team_origin.Controllers
                 var checkSuccess = _friendshipRepo.AddFriend(friendRequestVieModel.FromUserId, friendRequestVieModel.ToUserId);
                 if (checkSuccess)
                 {
-                    //Create a notification and send it to the other party
+                    //get the UserName of the request sender and create a notification
+                    var RequestSender = _userRepo.Find(u => u.Id == friendRequestVieModel.FromUserId).SingleOrDefault();
+                    var notification = new Notification
+                    {
+                        NotificationTypeId = (int)NotificationTypeConstants.FriendRequest,
+                        NotificationDetails = $"{RequestSender.FirstName + RequestSender.LastName} has sent you a friend request",
+                        NotificationAcknowledged = false,
+                        CreatedBy = friendRequestVieModel.FromUserId,
+                        CreatedDateTime = DateTime.UtcNow
+                    };
+                    _notificationRespository.Add(notification);
+                    _notificationRespository.SaveChanges();
+
+                    //get the notification id and save it in the UserNotificationRefTable
+                    int NotificationId = notification.NotificationId;
+                    var userNotificationRef = new UserNotificationRef
+                    {
+                        NotificationId = NotificationId,
+                        RecipientUserId = friendRequestVieModel.ToUserId
+                    };
+                    _userNotificationRef.Add(userNotificationRef);
+                    _userNotificationRef.SaveChanges();
+
                     return Ok(true);
                 }
                 else {

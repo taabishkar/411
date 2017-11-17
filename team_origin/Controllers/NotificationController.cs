@@ -14,28 +14,35 @@ namespace team_origin.Controllers
     {
         private readonly IRepository<User> _userRepository;
         private readonly IRepository<Notification> _notificationRepository;
-        public NotificationController(IRepository<User> userRepository, IRepository<Notification> notificationRepository)
+        private readonly IRepository<UserNotificationRef> _notificationRefRepository;
+        public NotificationController(IRepository<User> userRepository, IRepository<Notification> notificationRepository, IRepository<UserNotificationRef> notificationRefRepository)
         {
             _userRepository = userRepository;
             _notificationRepository = notificationRepository;
-
+            _notificationRefRepository = notificationRefRepository;
         }
 
-        //[HttpPost("get")]
-        //public IActionResult GetNotificationsByUser([FromBody] string UserId)
-        //{
-        //    try
-        //    {
-        //        var notifications = Notification
-        //            .Join(UserNotificationRef, n => n.NotificationId, nr => nr.NotificationId, (n, nr) => new { n, nr })
-        //            .Join(User, u => u.UserId, nr => nr.RecipientId, (nr, u) => new { nr, u })
-        //            .Select(u => new { UserId = n.nr.u.UserId });
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPost("get")]
+        public IActionResult GetNotificationsByUser([FromBody] string UserId)
+        {
+            List<Notification> notifications = new List<Notification>();
+            try
+            {
+                var notificationRefList = _notificationRefRepository.Find(nr => nr.RecipientUserId == UserId).ToList();
 
-        //}
+                foreach(var notificationRef in notificationRefList)
+                {
+                    var notification = _notificationRepository.Find(n => n.NotificationId == notificationRef.NotificationId).SingleOrDefault();
+                    notifications.Add(notification);
+                }
+
+                return Ok(notifications);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+
+        }
     }
 }
