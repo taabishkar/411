@@ -37,6 +37,17 @@ export class RegisterComponent implements OnInit {
     }
 
     register() {
+        if(this.registerUser.Password != this.registerUser.ConfirmPassword){
+            dialogs.alert({
+                title: "Error",
+                message: "Password and Confirm Password do not match.",
+                okButtonText: "Ok"
+            }).then(() => {
+                console.log("Dialog closed!");
+            });
+            this.isSigningUp = false;
+        } else{
+        
         this.userService.register(this.registerUser)
             .subscribe(
             () => {
@@ -55,6 +66,6 @@ export class RegisterComponent implements OnInit {
                 });
             }
             );
-
+        }
     }
 }

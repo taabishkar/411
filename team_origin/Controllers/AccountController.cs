@@ -27,7 +27,7 @@ namespace team_origin.Controllers
 
         private readonly IRepository<VerificationCode> _verificationCodeRepo;
 
-        private readonly INotificationRepository _notificationRespository;
+        private readonly INotificationRepository _notificationRepository;
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
@@ -42,7 +42,7 @@ namespace team_origin.Controllers
             _userRepo = userRepo;
             _verificationCodeSenderService = verificationCodeSenderService;
             _verificationCodeRepo = verificationCodeRepo;
-            _notificationRespository = notificationRepository;
+            _notificationRepository = notificationRepository;
         }
 
         [HttpPost("register")]
@@ -121,7 +121,7 @@ namespace team_origin.Controllers
             };
 
             //Get the Notifications for the loggedin user
-            var notifications = _notificationRespository.GetNotificationsByUserId(savedUser.Id);
+            var notifications = _notificationRepository.GetNotificationsByUserId(savedUser.Id);
             userResult.Notifications = notifications;
 
             return Ok(userResult);
@@ -147,7 +147,11 @@ namespace team_origin.Controllers
             var userResult = new LoginUserResult
             {
                 Id = userFromDatabase.Id,
-                Token = new JwtSecurityTokenHandler().WriteToken(token)
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                FirstName = userFromDatabase.FirstName,
+                LastName = userFromDatabase.LastName,
+                UserName = userFromDatabase.UserName,
+                PhoneNumber = userFromDatabase.PhoneNumber
             };
 
             return Ok(userResult);

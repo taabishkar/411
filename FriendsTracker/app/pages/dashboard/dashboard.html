@@ -1,28 +1,21 @@
-<!-- <ActionBar title="SideDrawer Button">
-    <android>
-      <NavigationButton icon="res://ic_menu" tap="showSlideout" />
-    </android>
-    <ios>
-      <ActionItem icon="res://ic_menu" ios.position="left" tap="showSideDrawer" />
-    </ios>
-  </ActionBar> -->
-
 <ActionBar>
   <label class="font-awesome" text="&#xf0c9;" (tap)="tapped()"></label>
 </ActionBar>
 <WrapLayout>
   <ScrollView>
-    <StackLayout>               
-            <label text="Current Mood:"></label>
-            <label text="{{mood}}" class="mood-view"></label>
-            <Button text="Edit Mood" (tap)="editMood()" class=""></Button>
+    <StackLayout>  
+            <StackLayout *ngIf="!editClicked">             
+              <label text="Current Mood:"></label>
+              <label text="{{mood}}" class="mood-view"></label>
+              <Button text="{{moodAction}}" (tap)="editMood()" class=""></Button>
+            </StackLayout>
             <StackLayout *ngIf="editClicked">
                 <label text="Current Mood:"></label>
                 <TextView hint="I'm feeling..." [(ngModel)]="userMood.moodDescription"></TextView>
                 <Button text="Update Mood" class="update-mood" (tap)="setMood()"></Button>
-              </StackLayout>          
+            </StackLayout>          
         <Image src="res://testwallpaper" stretch="none" horizontalAlignment="center" class="profile-image"></Image>
-        <label text="Username: {{dashboardItem.firstname + dashboardItem.lastname}}" horizontalAlignment="center" class="friend-name"></label>
+        <label text="User: {{dashboardItem.firstname}}  {{dashboardItem.lastname}}" horizontalAlignment="center" class="friend-name"></label>
         <label text="Phone Number: {{dashboardItem.phonenumber}}" horizontalAlignment="center" class="friend-name"></label>      
       
     </StackLayout>

@@ -27,6 +27,7 @@ export class DashBoardComponent implements OnInit {
     public lastname: string;
     public phonenumber: string;
     public dashboardItem = new DashboardItems();
+    public moodAction: string;
 
     constructor(private moodService: MoodService, private router: Router, private routerExtensions: RouterExtensions) {
         this.userMood = new UserMood();
@@ -81,10 +82,11 @@ export class DashBoardComponent implements OnInit {
                 this.userMood = res;
                 console.dir(this.userMood);
                 this.mood = res.moodDescription;
+                this.moodAction = "Change Mood";
                 console.log(this.mood);
             },
             (error) => {
-                
+                this.moodAction = "Set Mood";
             }
             );
     }

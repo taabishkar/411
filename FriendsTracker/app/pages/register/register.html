@@ -1,3 +1,6 @@
+<ActionBar title="Sign Up">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back"></NavigationButton>        
+</ActionBar>
 <WrapLayout>
     <ScrollView>
         <StackLayout>
@@ -23,20 +26,17 @@
                     <Label class="font-awesome login-entry-form-icon" text=" &#xf023;" row="0" col="0"></Label>
                     <TextField row="0" col="1" hint="Password"  secure="true" [(ngModel)]="registerUser.Password"></TextField>
                 </GridLayout>
-                <!-- <GridLayout rows="*" columns="*,*" height="50" class="extra-actions">
-                    <StackLayout orientation="horizontal" row="0" col="0">
-                        <Label class="font-awesome icons-extra-actions" text="&#xf06e; "></Label>
-                        <Label class="btn-outline" text="Forgot Credential"></Label>
-                    </StackLayout>
-                    <StackLayout orientation="horizontal" row="0" col="1">
-                        <Label class="btn-outline" text="Create Account"></Label>
-                        <Label class="font-awesome icons-extra-actions" text=" &#xf090;"></Label>
-                    </StackLayout>
-                </GridLayout> -->
+                <GridLayout rows="*" columns="auto, *" height="50">
+                        <Label class="font-awesome login-entry-form-icon" text=" &#xf023;" row="0" col="0"></Label>
+                        <TextField row="0" col="1" hint="Confirm Password"  secure="true" [(ngModel)]="registerUser.ConfirmPassword"></TextField>
+                </GridLayout>
                 <ActivityIndicator [busy]="isSigningUp" [visibility]="isSigningUp ? 'visible' : 'collapse'" row="1" horizontalAlignment="center"
                     verticalAlignment="center"></ActivityIndicator>
-                <Button text="&#xf090; Register" class="submit-button font-awesome" (tap)="registerCall()"></Button>
-                <Button text="&#xf048; Sign In" class="faq-button font-awesome" [nsRouterLink]="['/']" ></Button>
+                <Button text="&#xf090; Register" class="submit-button font-awesome" (tap)="registerCall()"></Button> 
+                <StackLayout orientation="horizontal" horizontalAlignment="center" row="0" col="1" [nsRouterLink]="['/']">                  
+                    <Label class="font-awesome icons-extra-actions" text=" &#xf04a;"></Label>
+                    <Label class="btn-outline" text="Sign In"></Label>
+                </StackLayout>               
             </StackLayout>
         </StackLayout>
     </ScrollView>

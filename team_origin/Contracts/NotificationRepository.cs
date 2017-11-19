@@ -23,6 +23,7 @@ namespace team_origin.Contracts
                                  where u.Id == UserId && n.NotificationAcknowledged == false
                                  select n
                                  ).ToList();
+                return notifications;
             }
             catch (Exception e)
             {

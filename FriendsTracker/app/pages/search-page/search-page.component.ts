@@ -103,6 +103,11 @@ export class SearchPageComponent implements OnInit {
             );
 
         }
+
+        GoBack(){
+            console.log("Back tapped.");
+            this.routerExtensions.navigate([""], { clearHistory: true });
+        }
     
 
 }
