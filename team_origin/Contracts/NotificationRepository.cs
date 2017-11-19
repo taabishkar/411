@@ -14,7 +14,21 @@ namespace team_origin.Contracts
         }
         public ICollection<Notification> GetNotificationsByUserId(string UserId)
         {
-            throw new NotImplementedException();
+            ICollection<Notification> notifications = null;
+            try
+            {
+                notifications = (from u in _dbContext.Users
+                                 join unr in _dbContext.UserNotificationRef on u.Id equals unr.RecipientUserId
+                                 join n in _dbContext.Notification on unr.NotificationId equals n.NotificationId
+                                 where u.Id == UserId && n.NotificationAcknowledged == false
+                                 select n
+                                 ).ToList();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return notifications;
         }
 
         public bool UpdateNotification(Notification Notification)

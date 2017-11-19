@@ -26,12 +26,15 @@ namespace team_origin.Controllers
         private readonly IVerificationCodeSenderService _verificationCodeSenderService;
 
         private readonly IRepository<VerificationCode> _verificationCodeRepo;
+
+        private readonly INotificationRepository _notificationRespository;
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IUserRepository userRepo,
             IVerificationCodeSenderService verificationCodeSenderService,
-            IRepository<VerificationCode> verificationCodeRepo
+            IRepository<VerificationCode> verificationCodeRepo,
+            INotificationRepository notificationRepository
            )
         {
             _userManager = userManager;
@@ -39,6 +42,7 @@ namespace team_origin.Controllers
             _userRepo = userRepo;
             _verificationCodeSenderService = verificationCodeSenderService;
             _verificationCodeRepo = verificationCodeRepo;
+            _notificationRespository = notificationRepository;
         }
 
         [HttpPost("register")]
@@ -115,6 +119,10 @@ namespace team_origin.Controllers
                 UserName = savedUser.UserName,
                 PhoneNumber = savedUser.PhoneNumber
             };
+
+            //Get the Notifications for the loggedin user
+            var notifications = _notificationRespository.GetNotificationsByUserId(savedUser.Id);
+            userResult.Notifications = notifications;
 
             return Ok(userResult);
         }
