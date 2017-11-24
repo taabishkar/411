@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using team_origin.Contracts;
 using team_origin.Entities.Notifications;
+using team_origin.ViewModels;
+using System.Collections;
 
 namespace team_origin.Controllers
 {
@@ -23,12 +25,12 @@ namespace team_origin.Controllers
         }
 
         [HttpPost("get")]
-        public IActionResult GetNotificationsByUser([FromBody] string UserId)
+        public IActionResult GetNotificationsByUser([FromBody] GetMoodByUserViewModel user)
         {
-            List<Notification> notifications = new List<Notification>();
+            List<Notification>notifications = new List<Notification>();
             try
             {
-                var notificationRefList = _notificationRefRepository.Find(nr => nr.RecipientUserId == UserId).ToList();
+                var notificationRefList = _notificationRefRepository.Find(nr => nr.RecipientUserId == user.UserId).ToList();
 
                 foreach(var notificationRef in notificationRefList)
                 {

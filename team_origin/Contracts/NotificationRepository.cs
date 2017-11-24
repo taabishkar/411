@@ -22,8 +22,7 @@ namespace team_origin.Contracts
                                  join n in _dbContext.Notification on unr.NotificationId equals n.NotificationId
                                  where u.Id == UserId && n.NotificationAcknowledged == false
                                  select n
-                                 ).ToList();
-                return notifications;
+                                 ).ToList();               
             }
             catch (Exception e)
             {

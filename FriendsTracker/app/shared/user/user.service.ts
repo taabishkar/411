@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Rx';
 import { Config } from '../config';
 import { LoginUser } from './loginUser';
 import { RegisterUser } from './registerUser';
+import { Notification }from './notification';
 
 @Injectable()
 export class UserService {
@@ -28,6 +29,7 @@ export class UserService {
             .map((res: Response) => res.json())
             .do(data => {
                 console.log(data);
+                console.dir(data);
                 Config.token = data.token;
                 Config.fromUserId = data.id;
                 Config.userName = data.userName;

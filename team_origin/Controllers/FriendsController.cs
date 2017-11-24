@@ -84,7 +84,7 @@ namespace team_origin.Controllers
                     var notification = new Notification
                     {
                         NotificationTypeId = (int)NotificationTypeConstants.FriendRequest,
-                        NotificationDetails = $"{RequestSender.FirstName + RequestSender.LastName} has sent you a friend request",
+                        NotificationDetails = $"{RequestSender.FirstName + ' ' + RequestSender.LastName} has sent you a friend request",
                         NotificationAcknowledged = false,
                         CreatedBy = friendRequestVieModel.FromUserId,
                         CreatedDateTime = DateTime.UtcNow

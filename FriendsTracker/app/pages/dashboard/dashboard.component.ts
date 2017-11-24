@@ -1,3 +1,4 @@
+import { forEach } from '@angular/router/src/utils/collection';
 import { DashboardItems } from './../../shared/dashboard/dashboard';
 import { MoodService } from './../../shared/user/mood.service';
 import { UserMood } from './../../shared/user/userMood';
@@ -9,10 +10,11 @@ import { Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { Config } from "../../shared/config";
 import * as dialogs from 'ui/dialogs';
+import { NotificationService } from './../../shared/user/notification.service';
 
 @Component({
     selector: "dashboard",
-    providers: [MoodService],
+    providers: [MoodService, NotificationService],
     templateUrl: "pages/dashboard/dashboard.html",
     styleUrls: ["pages/dashboard/dashboard-common.css"]
 })
@@ -28,8 +30,9 @@ export class DashBoardComponent implements OnInit {
     public phonenumber: string;
     public dashboardItem = new DashboardItems();
     public moodAction: string;
+    public Notifications: Notification[];
 
-    constructor(private moodService: MoodService, private router: Router, private routerExtensions: RouterExtensions) {
+    constructor(private moodService: MoodService, private router: Router, private routerExtensions: RouterExtensions, private notificationService: NotificationService) {
         this.userMood = new UserMood();
         this.editClicked = false;
         this.dashboardItem = new DashboardItems();
@@ -39,9 +42,9 @@ export class DashBoardComponent implements OnInit {
       this.getMood(); 
       this.editClicked = false;
       this.setDashBoardData();
+      this.getNotifications();
     }
     tapped(){
-        console.log("Hamburger tapped");
         this.isTapped = !this.isTapped;
     }
 
@@ -100,6 +103,20 @@ export class DashBoardComponent implements OnInit {
         this.dashboardItem.lastname = Config.lastName;
         this.dashboardItem.phonenumber = Config.phoneNumber;
         this.dashboardItem.username = Config.userName;
+    }
+
+    getNotifications(){
+        this.notificationService.getNotifications()
+        .subscribe(
+            (res) => {
+                console.log("Notifications fetched!");
+                console.dir(res);
+                console.dir(res._body[0]);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     SignOut(){

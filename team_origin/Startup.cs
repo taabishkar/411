@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.Text;
 using team_origin.Contracts;
 using team_origin.Entities;
@@ -60,6 +61,10 @@ namespace team_origin
                   });
 
             services.AddMvc();
+
+            services.AddMvc().AddJsonOptions(options => {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
 
             services.AddDbContext<TeamOriginContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
