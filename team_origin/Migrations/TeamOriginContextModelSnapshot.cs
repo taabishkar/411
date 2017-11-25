@@ -303,6 +303,47 @@ namespace team_origin.Migrations
                     b.ToTable("UserNotificationRef");
                 });
 
+            modelBuilder.Entity("team_origin.Entities.Schedule.Event", b =>
+                {
+                    b.Property<int>("EventId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("DayId");
+
+                    b.Property<string>("EventDescription");
+
+                    b.Property<int>("From");
+
+                    b.Property<int>("To");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("EventId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Event");
+                });
+
+            modelBuilder.Entity("team_origin.Entities.Schedule.UserEventRef", b =>
+                {
+                    b.Property<int>("UserEventRefId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EventId");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("UserEventRefId");
+
+                    b.HasIndex("EventId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserEventRef");
+                });
+
             modelBuilder.Entity("team_origin.Entities.VerificationCode", b =>
                 {
                     b.Property<int>("Id")
@@ -413,6 +454,25 @@ namespace team_origin.Migrations
                     b.HasOne("team_origin.Entities.Notifications.User", "User")
                         .WithMany("UserNotificationRef")
                         .HasForeignKey("RecipientUserId");
+                });
+
+            modelBuilder.Entity("team_origin.Entities.Schedule.Event", b =>
+                {
+                    b.HasOne("team_origin.Entities.Notifications.User")
+                        .WithMany("Event")
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("team_origin.Entities.Schedule.UserEventRef", b =>
+                {
+                    b.HasOne("team_origin.Entities.Schedule.Event", "Event")
+                        .WithOne("UserEventRef")
+                        .HasForeignKey("team_origin.Entities.Schedule.UserEventRef", "EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("team_origin.Entities.Notifications.User", "User")
+                        .WithMany("UserEventRef")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("team_origin.Entities.VerificationCode", b =>

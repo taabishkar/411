@@ -4,10 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using team_origin.Entities;
 using team_origin.Entities.Notifications;
+using team_origin.Entities.Schedule;
 
 namespace team_origin
 {
-    public class TeamOriginContext: IdentityDbContext<User>
+    public class TeamOriginContext : IdentityDbContext<User>
     {
         public DbSet<UserNotificationRef> UserNotificationRef { get; set; }
         public DbSet<VerificationCode> VerificationCode { get; set; }
@@ -17,6 +18,8 @@ namespace team_origin
         public DbSet<Mood> Mood { get; set; }
         public DbSet<Notification> Notification { get; set; }
         public DbSet<NotificationType> NotificationType { get; set; }
+        public DbSet<Event> Event { get; set; }
+        public DbSet<UserEventRef> UserEventRef { get; set; }
         public TeamOriginContext(DbContextOptions<TeamOriginContext> options)
             : base(options)
         {
@@ -215,7 +218,31 @@ namespace team_origin
                     .WithOne(nr => nr.UserNotificationRef)
                     .HasForeignKey<UserNotificationRef>(nr => nr.NotificationId);
                 });
-#endregion Notification
+            #endregion Notification
+            #region Schedule
+            //For Event
+            modelBuilder
+                .Entity<Event>(entity =>
+                {
+                    entity.HasKey(e => e.EventId);
+                    entity.Property(e => e.EventId)
+                    .ValueGeneratedOnAdd();
+                });
+            //For UserEventRef Table
+            modelBuilder
+                .Entity<UserEventRef>(entity =>
+                {
+                    entity.HasKey(uer => uer.UserEventRefId);
+                    entity.Property(uer => uer.UserEventRefId)
+                    .ValueGeneratedOnAdd();
+                    entity.HasOne(u => u.User)
+                    .WithMany(uer => uer.UserEventRef)
+                    .HasForeignKey(uer => uer.UserId);
+                    entity.HasOne(e => e.Event)
+                    .WithOne(uer => uer.UserEventRef)
+                    .HasForeignKey<UserEventRef>(uer => uer.EventId);
+                });
+            #endregion Schedule
         }
     }
 }

@@ -76,6 +76,7 @@ namespace team_origin
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IFriendshipRepository, FriendshipRespository>();
             services.AddTransient<INotificationRepository, NotificationRepository>();
+            services.AddTransient<IScheduleRepository, ScheduleRepository>();
 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
