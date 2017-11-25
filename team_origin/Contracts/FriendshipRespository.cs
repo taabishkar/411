@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using team_origin.Entities;
+using team_origin.Entities.Notifications;
 
 namespace team_origin.Contracts
 {
@@ -48,6 +51,35 @@ namespace team_origin.Contracts
                  || f.ToUserId == FromUserId && f.FromUserId == ToUserId);
 
             return friendship;
+        }
+
+        public List<User> GetAllFriendsByUserId(string UserId)
+        {
+            List<User> friends = null;
+            try
+            {                
+                var friendIds = ((from f in _dbContext.Friendship
+                                 join u in _dbContext.Users on f.FromUserId equals u.Id
+                                 where 
+                                 f.FromUserId == UserId && f.FriendshipStatusId == 1
+                                 select f.ToUserId)
+                                 .Union
+                                (from f1 in _dbContext.Friendship
+                                 join u in _dbContext.Users on f1.ToUserId equals u.Id
+                                 where
+                                      f1.ToUserId == UserId && f1.FriendshipStatusId == 1
+                                 select f1.FromUserId)).ToList();
+
+                if(friendIds != null)
+                {
+                    friends = (from u in _dbContext.Users where friendIds.Contains(u.Id) select u).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return friends;
         }
     }
 }

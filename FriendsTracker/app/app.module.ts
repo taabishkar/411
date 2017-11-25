@@ -1,3 +1,4 @@
+import { FriendsComponent } from './pages/friends/friends.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { DashBoardComponent } from './pages/dashboard/dashboard.component';
 import { VerificationCodeComponent } from './pages/verification-code/verification-code.component';
@@ -34,7 +35,8 @@ import { SearchPageComponent } from "./pages/search-page/search-page.component";
     VerificationCodeComponent,
     SearchPageComponent,
     DashBoardComponent,
-    NotificationComponent
+    NotificationComponent,
+    FriendsComponent
   ],
 
   bootstrap: [

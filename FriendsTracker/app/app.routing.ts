@@ -1,3 +1,4 @@
+import { FriendsComponent } from './pages/friends/friends.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { DashBoardComponent } from './pages/dashboard/dashboard.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
@@ -13,7 +14,8 @@ export const routes = [
   {path: "register", component: RegisterComponent},
   {path: "verification-code", component: VerificationCodeComponent},
   {path: "search-page", component: SearchPageComponent},
-  {path: "notification", component: NotificationComponent}
+  {path: "notification", component: NotificationComponent},
+  {path: "friends", component: FriendsComponent}
 ];
 
 export const navigatableComponents = [
@@ -22,5 +24,6 @@ export const navigatableComponents = [
   VerificationCodeComponent,
   SearchPageComponent,
   DashBoardComponent,
-  NotificationComponent
+  NotificationComponent,
+  FriendsComponent
 ];

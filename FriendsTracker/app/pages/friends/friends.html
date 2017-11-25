@@ -1,0 +1,13 @@
+<ActionBar title="All Friends">
+        <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="GoBack()"></NavigationButton>
+    </ActionBar>
+    <WrapLayout>
+            <ListView [items]="friends">
+                <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                    <StackLayout [class.odd]="odd" [class.even]="even">
+                        <Label text='{{item.fullName}}' class="fullName" width="100%"></Label>
+                        <Label text='{{item.phone}}' class="phone" width="100%"></Label>                        
+                    </StackLayout>
+                </ng-template>
+            </ListView>
+    </WrapLayout>

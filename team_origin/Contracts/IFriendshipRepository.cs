@@ -1,4 +1,6 @@
-﻿using team_origin.Entities;
+﻿using System.Collections.Generic;
+using team_origin.Entities;
+using team_origin.Entities.Notifications;
 
 namespace team_origin.Contracts
 {
@@ -9,5 +11,6 @@ namespace team_origin.Contracts
         bool AddFriend(string FromUserId, string ToUserId);
 
         Friendship AcceptRequest(string FromUserId, string ToUserId);
+        List<User> GetAllFriendsByUserId(string UserId);
     }
 }

@@ -1,0 +1,15 @@
+.odd {
+    background-color: red;
+}
+
+.even {
+    background-color: blue;    
+}
+.fullName{
+    font-size: 15;
+    color: white;  
+}
+.phone{
+    font-size: 10;
+    color: white;
+}

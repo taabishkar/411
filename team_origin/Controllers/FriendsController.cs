@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using team_origin.Contracts;
 using team_origin.Entities;
@@ -198,6 +199,37 @@ namespace team_origin.Controllers
             }
             
         }
-        
+
+        [HttpPost("get")]
+        public IActionResult GetAllFriends([FromBody] GetMoodByUserViewModel user)
+        {
+            List<User> friends = new List<User>();
+            List<FriendListViewModel> friendList = new List<FriendListViewModel>();
+            try
+            {
+                friends = _friendshipRepo.GetAllFriendsByUserId(user.UserId);
+                if(friends != null)
+                {
+                    foreach(var friend in friends)
+                    {
+                        FriendListViewModel friendListViewModel = new FriendListViewModel
+                        {
+                            FirstName = friend.FirstName,
+                            LastName = friend.LastName,
+                            UserId = friend.Id,
+                            Phone = friend.PhoneNumber
+                        };
+                        friendList.Add(friendListViewModel);
+                    }
+                }
+                return Ok(friendList);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+
+        }
+
     }
 }

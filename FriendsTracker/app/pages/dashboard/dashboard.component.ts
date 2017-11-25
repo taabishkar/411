@@ -30,7 +30,7 @@ export class DashBoardComponent implements OnInit {
     public phonenumber: string;
     public dashboardItem = new DashboardItems();
     public moodAction: string;
-    public Notifications: Notification[];
+    public Notifications: Notification[] = [];
 
     constructor(private moodService: MoodService, private router: Router, private routerExtensions: RouterExtensions, private notificationService: NotificationService) {
         this.userMood = new UserMood();
