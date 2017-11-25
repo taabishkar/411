@@ -35,10 +35,29 @@ namespace team_origin.Controllers
                 foreach(var notificationRef in notificationRefList)
                 {
                     var notification = _notificationRepository.Find(n => n.NotificationId == notificationRef.NotificationId).SingleOrDefault();
-                    notifications.Add(notification);
+                    if(notification.NotificationAcknowledged == false)
+                    {
+                        notifications.Add(notification);
+                    }                    
                 }
 
                 return Ok(notifications);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+
+        }
+
+        [HttpPost("acknowledge")]
+        public IActionResult AcknowledgeNotification([FromBody] Notification notification)
+        {           
+            try
+            {
+                notification.NotificationAcknowledged = true;
+                _notificationRepository.Update(notification);
+                return Ok();
             }
             catch (Exception e)
             {

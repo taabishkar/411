@@ -1,0 +1,19 @@
+<ActionBar title="Notifications">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="GoBack()"></NavigationButton>
+</ActionBar>
+<WrapLayout>
+        <ListView [items]="Notifications">
+            <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                <StackLayout [class.odd]="odd" [class.even]="even">
+                    <Label text='{{item.notificationDetails}}    &#xF112;' class="font-awesome notification-list" (tap)="notificationTapped(item)"></Label>
+                    <StackLayout *ngIf="IsFriendRequest" orientation="horizontal" height="50" horizontalAlignment="center" class="respondButtons">
+                        <Button text="&#xf00c; Accept" class="font-awesome respondButton-Accept" (tap)="acceptRequest(item)"></Button>
+                        <Button text="&#xf05e; Reject" class="font-awesome respondButton-Reject" (tap)="rejectRequest(item)"></Button>
+                    </StackLayout>
+                    <StackLayout *ngIf="generalNotification" orientation="horizontal" height="50" horizontalAlignment="center" class="respondButtons">
+                        <Button text="&#xf05e; Clear" class="font-awesome respondButton-Reject" (tap)="clearNotification(item)"></Button>
+                    </StackLayout>
+                </StackLayout>
+            </ng-template>
+        </ListView>
+</WrapLayout>

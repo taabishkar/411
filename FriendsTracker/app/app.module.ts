@@ -1,3 +1,4 @@
+import { NotificationComponent } from './pages/notification/notification.component';
 import { DashBoardComponent } from './pages/dashboard/dashboard.component';
 import { VerificationCodeComponent } from './pages/verification-code/verification-code.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -32,7 +33,8 @@ import { SearchPageComponent } from "./pages/search-page/search-page.component";
     RegisterComponent,
     VerificationCodeComponent,
     SearchPageComponent,
-    DashBoardComponent
+    DashBoardComponent,
+    NotificationComponent
   ],
 
   bootstrap: [

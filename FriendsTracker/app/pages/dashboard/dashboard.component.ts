@@ -110,8 +110,10 @@ export class DashBoardComponent implements OnInit {
         .subscribe(
             (res) => {
                 console.log("Notifications fetched!");
-                console.dir(res);
-                console.dir(res._body[0]);
+                if(res._body != null){
+                    this.Notifications = res._body;
+                }
+                console.dir(this.Notifications);
             },
             (error) => {
                 console.log(error);

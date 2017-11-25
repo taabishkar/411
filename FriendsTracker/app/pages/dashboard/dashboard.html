@@ -23,7 +23,7 @@
 <StackLayout class="side-drawer" *ngIf="isTapped">
   <label class="menu-list" text="Home">
       </label>
-  <label class="menu-list" text ="Notifications" (tap)=""></label>
+  <label class="menu-list" text ="Notifications ({{Notifications.length}})" [nsRouterLink]="['/notification']"></label>
   <label class="menu-list" text="Search Friends" [nsRouterLink]="['/search-page']">
       </label>
   <label class="menu-list" text="Friends List">

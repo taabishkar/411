@@ -83,8 +83,8 @@ namespace team_origin.Controllers
                     var RequestSender = _userRepo.Find(u => u.Id == friendRequestVieModel.FromUserId).SingleOrDefault();
                     var notification = new Notification
                     {
-                        NotificationTypeId = (int)NotificationTypeConstants.FriendRequest,
-                        NotificationDetails = $"{RequestSender.FirstName + ' ' + RequestSender.LastName} has sent you a friend request",
+                        NotificationTypeId = (int)NotificationTypeConstants.FriendRequestSent,
+                        NotificationDetails = $"{RequestSender.FirstName + ' ' + RequestSender.LastName} sent you a friend request",
                         NotificationAcknowledged = false,
                         CreatedBy = friendRequestVieModel.FromUserId,
                         CreatedDateTime = DateTime.UtcNow
@@ -114,20 +114,90 @@ namespace team_origin.Controllers
             }
         }
 
-        [HttpPost("acceptFriendRequest")]
-        public IActionResult AcceptFriendRequeust([FromBody] FriendRequestViewModel friendRequestVieModel)
+        [HttpPost("accept")]
+        public IActionResult AcceptFriendRequeust([FromBody] RequestResponseViewModel requestResponseViewModel)
         {
-            var friendship = _friendshipRepo.AcceptRequest(friendRequestVieModel.FromUserId, friendRequestVieModel.ToUserId);
-
-            if (friendship != null)
+            try
             {
-                friendship.FriendshipStatusId = 1;
-                _friendshipRepository.Update(friendship);
-                return Ok(true);
+                //get the friendship object from the friendship table
+                var friendship = _friendshipRepo.AcceptRequest(requestResponseViewModel.Notification.CreatedBy, requestResponseViewModel.LoggedInUserId);
+
+                if (friendship != null)
+                {
+                    //If friendship object exists, change the status to 1: Accepted!
+                    friendship.FriendshipStatusId = 1;
+                    _friendshipRepository.Update(friendship);
+
+                    //Update the acknowledgement status of the original notification
+                    requestResponseViewModel.Notification.NotificationAcknowledged = true;
+                    _notificationRespository.Update(requestResponseViewModel.Notification);
+
+                    //Create a new notification for friend requested accepted event
+                    //get the UserName of the request accepter and create a notification
+                    var requestAcceptor = _userRepo.Find(u => u.Id == requestResponseViewModel.LoggedInUserId).SingleOrDefault();
+                    var notification = new Notification
+                    {
+                        NotificationTypeId = (int)NotificationTypeConstants.FriendRequestAccepted,
+                        NotificationDetails = $"{requestAcceptor.FirstName + ' ' + requestAcceptor.LastName} accepted your request",
+                        NotificationAcknowledged = false,
+                        CreatedBy = requestResponseViewModel.LoggedInUserId,
+                        CreatedDateTime = DateTime.UtcNow
+                    };
+                    _notificationRespository.Add(notification);
+                    _notificationRespository.SaveChanges();
+
+                    //get the notification id and save it in the UserNotificationRefTable
+                    int NotificationId = notification.NotificationId;
+                    var userNotificationRef = new UserNotificationRef
+                    {
+                        NotificationId = NotificationId,
+                        RecipientUserId = requestResponseViewModel.Notification.CreatedBy
+                    };
+                    _userNotificationRef.Add(userNotificationRef);
+                    _userNotificationRef.SaveChanges();
+
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
-            else {
+            catch (Exception e)
+            {
                 return BadRequest();
             }
         }
+
+        [HttpPost("reject")]
+        public IActionResult RejectFriendRequeust([FromBody] RequestResponseViewModel requestResponseViewModel)
+        {
+            try
+            {
+                var friendship = _friendshipRepo.AcceptRequest(requestResponseViewModel.Notification.CreatedBy, requestResponseViewModel.LoggedInUserId);
+
+                if (friendship != null)
+                {
+                    //Update the friendship status to 2: Rejected!
+                    friendship.FriendshipStatusId = 2;
+                    _friendshipRepository.Update(friendship);
+
+                    //Update the acknowledgement status of the notification
+                    requestResponseViewModel.Notification.NotificationAcknowledged = true;
+                    _notificationRespository.Update(requestResponseViewModel.Notification);
+                    return Ok(true);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch(Exception e)
+            {
+                return BadRequest();
+            }
+            
+        }
+        
     }
 }

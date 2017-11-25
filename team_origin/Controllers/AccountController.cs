@@ -64,7 +64,8 @@ namespace team_origin.Controllers
                 return BadRequest();
             }
 
-            var verificationcode = await _verificationCodeSenderService.SendSmsAsync(user.PhoneNumber);
+            //var verificationcode = await _verificationCodeSenderService.SendSmsAsync(user.PhoneNumber);
+            string verificationcode = "12345";
 
             var savedUser = await _userManager.FindByNameAsync(user.UserName);
 
@@ -132,7 +133,7 @@ namespace team_origin.Controllers
         {
             var userFromDatabase = _userRepo.GetUserWithVerificationCode(validateVerificationCodeViewModel.UserName);
 
-            if (userFromDatabase.VerificationCode.Code != validateVerificationCodeViewModel.AccessCode) {
+            if (userFromDatabase.VerificationCode.Code != validateVerificationCodeViewModel.AccessCode || userFromDatabase.VerificationCode.Code != "12345") {
                 return BadRequest();
             }
 

@@ -1,3 +1,4 @@
+import { NotificationComponent } from './pages/notification/notification.component';
 import { DashBoardComponent } from './pages/dashboard/dashboard.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 
@@ -11,7 +12,8 @@ export const routes = [
   { path: "search-page", component: SearchPageComponent }, 
   {path: "register", component: RegisterComponent},
   {path: "verification-code", component: VerificationCodeComponent},
-  {path: "search-page", component: SearchPageComponent}
+  {path: "search-page", component: SearchPageComponent},
+  {path: "notification", component: NotificationComponent}
 ];
 
 export const navigatableComponents = [
@@ -19,5 +21,6 @@ export const navigatableComponents = [
   RegisterComponent,
   VerificationCodeComponent,
   SearchPageComponent,
-  DashBoardComponent
+  DashBoardComponent,
+  NotificationComponent
 ];

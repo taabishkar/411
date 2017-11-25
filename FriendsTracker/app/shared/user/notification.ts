@@ -6,3 +6,7 @@ export class Notification {
     public CreatedBy: string;
     public CreatedDateTime: Date; 
 }
+export class FriendRequestResponse{
+    public notification: Notification;
+    public LoggedInUserId: string
+}

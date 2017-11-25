@@ -11,6 +11,7 @@ namespace team_origin.Enums
     }
     public enum NotificationTypeConstants
     {
-        FriendRequest = 1
+        FriendRequestSent = 1,
+        FriendRequestAccepted = 2
     }
 }
