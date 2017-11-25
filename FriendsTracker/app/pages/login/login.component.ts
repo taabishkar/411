@@ -17,11 +17,13 @@ import * as dialogs from "ui/dialogs";
 export class LoginComponent implements OnInit {
     loginUser: LoginUser;
     isSigningIn: boolean = false;
+    
     ngOnInit() {
         if (Config.token != "") {
             this.routerExtensions.navigate(["/dashboard"], { clearHistory: true });
         }
         this.page.actionBarHidden = true;
+
     }
 
     constructor(private router: Router, private userService: UserService, private page: Page, private routerExtensions: RouterExtensions) {
