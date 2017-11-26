@@ -21,13 +21,19 @@
     text-align: center;
 }
 .submit-button{
-    background-color: green;
     height: 40;
 }
-
+.save-button{
+    margin: 10 0 10 40;
+    width: 30%;
+}
 .title-text{
     font-weight: bold;
     font-size: 15;
+}
+
+.event-display{
+    border: solid 1px cadetblue
 }
 
 /*.testGrid{

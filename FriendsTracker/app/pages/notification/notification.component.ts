@@ -16,39 +16,39 @@ export class NotificationComponent implements OnInit {
     public IsFriendRequest: boolean;
     public generalNotification: boolean;
     constructor(private router: Router, private routerExtensions: RouterExtensions, private notificationService: NotificationService) {
-        
+
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.getNotifications();
     }
-    getNotifications(){
+    getNotifications() {
         this.notificationService.getNotifications()
-        .subscribe(
+            .subscribe(
             (res) => {
                 console.log("Notifications fetched!");
-                if(res._body != null){
-                    this.Notifications = res._body; 
+                if (res._body != null) {
+                    this.Notifications = res._body;
                 }
                 console.dir(this.Notifications);
             },
             (error) => {
                 console.log(error);
             }
-        );
+            );
     }
-    notificationTapped(item){
+    notificationTapped(item) {
         console.dir(item);
-        if(item.notificationTypeId == 1){
+        if (item.notificationTypeId == 1) {
             this.IsFriendRequest = !this.IsFriendRequest;
         }
-        else{
-            this.generalNotification = !this.generalNotification; 
+        else {
+            this.generalNotification = !this.generalNotification;
         }
     }
-    acceptRequest(item){
+    acceptRequest(item) {
         this.notificationService.acceptRequest(item)
-        .subscribe(
+            .subscribe(
             (res) => {
                 dialogs.alert({
                     title: "Success",
@@ -56,7 +56,7 @@ export class NotificationComponent implements OnInit {
                     okButtonText: "Ok"
                 });
                 var index = this.Notifications.indexOf(item);
-                this.Notifications.splice(index,1);
+                this.Notifications.splice(index, 1);
                 this.IsFriendRequest = !this.IsFriendRequest;
             },
             (error) => {
@@ -67,11 +67,11 @@ export class NotificationComponent implements OnInit {
                 });
                 console.log(error);
             }
-        );
+            );
     }
-    rejectRequest(item){
+    rejectRequest(item) {
         this.notificationService.rejectRequest(item)
-        .subscribe(
+            .subscribe(
             (res) => {
                 dialogs.alert({
                     title: "Success",
@@ -79,7 +79,7 @@ export class NotificationComponent implements OnInit {
                     okButtonText: "Ok"
                 });
                 var index = this.Notifications.indexOf(item);
-                this.Notifications.splice(index,1);
+                this.Notifications.splice(index, 1);
                 this.IsFriendRequest = !this.IsFriendRequest;
             },
             (error) => {
@@ -90,28 +90,28 @@ export class NotificationComponent implements OnInit {
                 });
                 console.log(error);
             }
-        );
+            );
     }
-    clearNotification(item){
+    clearNotification(item) {
         this.notificationService.clearNotification(item)
             .subscribe(
-                (res) => {
-                    
-                    var index = this.Notifications.indexOf(item);
-                    this.Notifications.splice(index,1);
-                    this.generalNotification = !this.generalNotification;
-                },
-                (error) => {
-                    dialogs.alert({
-                        title: "Error",
-                        message: "Sorry, an error occured.",
-                        okButtonText: "Ok"
-                    });
-                    console.log(error);
-                }
-            );        
+            (res) => {
+
+                var index = this.Notifications.indexOf(item);
+                this.Notifications.splice(index, 1);
+                this.generalNotification = !this.generalNotification;
+            },
+            (error) => {
+                dialogs.alert({
+                    title: "Error",
+                    message: "Sorry, an error occured.",
+                    okButtonText: "Ok"
+                });
+                console.log(error);
+            }
+            );
     }
-    GoBack(){
+    GoBack() {
         console.log("Back tapped.");
         this.routerExtensions.navigate([""], { clearHistory: true });
     }

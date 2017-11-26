@@ -1,87 +1,58 @@
 <ActionBar title="My Schedule">
-        <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="GoBack()"></NavigationButton>
-    
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="GoBack()"></NavigationButton>
+
 </ActionBar>
 
 <WrapLayout>
     <ScrollView>
         <StackLayout>
-            <GridLayout rows="auto"
-                columns="auto,auto,50,auto,50" class="dd-layout" height="40">
-                <StackLayout 
-                rows="auto"
-                columns="auto,auto,50,auto,50" orientation="horizontal">   
-                <DropDown class="dd-days" 
-                  [items]="days"
-                  [(ngModel)]="daysIndex"
-                  (selectedIndexChanged)="onchangeDays($event)"
-                  (opened)="onopen()"
-                  (closed)="onclose()"
-                 ></DropDown>
-            <Label class="label-alignment" text= "From: " row="0" col="0"></Label>
+            <GridLayout rows="auto" columns="auto,auto,50,auto,50" class="dd-layout" height="40">
+                <StackLayout rows="auto" columns="auto,auto,50,auto,50" orientation="horizontal">
+                    <DropDown class="dd-days" [items]="days" [(ngModel)]="daysIndex" (selectedIndexChanged)="onchangeDays($event)" (opened)="onopen()"
+                        (closed)="onclose()"></DropDown>
+                    <Label class="label-alignment" text="From: " row="0" col="0"></Label>
 
-            <DropDown class="dd-alignment" [items]="startTime"
-                  [(ngModel)]="startTimeIndex"
-                  (selectedIndexChanged)="onchangeStartTime($event)"
-                  (opened)="onopen()"
-                  (closed)="onclose()"   
-                            
-                  ></DropDown>
+                    <DropDown class="dd-alignment" [items]="startTime" [(ngModel)]="startTimeIndex" (selectedIndexChanged)="onchangeStartTime($event)"
+                        (opened)="onopen()" (closed)="onclose()"></DropDown>
 
-                  <Label class="label-alignment" text="To: " row ="0" col="2"></Label>
+                    <Label class="label-alignment" text="To: " row="0" col="2"></Label>
 
-                  <DropDown 
-                  class="dd-alignment"
-                  [items]="endTime"
-                  [(ngModel)]="endTimeIndex"
-                  (selectedIndexChanged)="onchangeEndTime($event)"
-                  (opened)="onopen()"
-                  (closed)="onclose()"  >
-                  </DropDown>
+                    <DropDown class="dd-alignment" [items]="endTime" [(ngModel)]="endTimeIndex" (selectedIndexChanged)="onchangeEndTime($event)"
+                        (opened)="onopen()" (closed)="onclose()">
+                    </DropDown>
                 </StackLayout>
 
-    </GridLayout>
-    <GridLayout class="testGrid" rows="auto"
-                columns="60,*,60" >
-        <!--<StackLayout class="testStack" row= "0" col="*, *, *" orientation="horizontal">-->
-            <Label style="margin-top: 10" text= "   Event: " row="0" col="0"></Label>
-            <TextField 
-                class="event-textField" 
-                [(ngModel)]="events"  
-                hint="Event" 
-                row="0" 
-                col="1">    
-            </TextField>
-            <Button 
-                class="submit-button" 
-                text="Add" 
-                row="0" 
-                col="2"
-                (tap)="onTap(daysIndex, startTimeIndex, endTimeIndex, events)">
-            </Button>
-        <!--</StackLayout>  -->
-    </GridLayout>
-
-    <GridLayout rows="auto, auto" columns="80,50,50,*,90" height="50" class="title-text"> 
-            <Label row="0" colspan="5" style="margin-bottom: 10" text=" _____________________________________________________"></Label>
-            <Label row="1" col="0" class="title-text" text="   Day "></Label>
-            <Label row="1" col="1" class="title-text" text=" From " ></Label>
-            <Label row="1" col="2" class="title-text" text=" To " ></Label>
-            <Label row="1" col="3" class="title-text" text=" Event " ></Label>
-            <Label row="1" col="4" class="title-text" text= "" ></Label>
-
-    </GridLayout>
-
-    <GridLayout rows="auto" columns="80,50,50,*,90" *ngFor="let newEvent of eventArray"  height="25">
-            <Label row="1" col="0" text=" {{ newEvent.Day }}" ></Label>
-            <Label row="1" col="1" text=" {{ newEvent.From }} " ></Label>
-            <Label row="1" col="2" text=" {{ newEvent.To }} " ></Label>
-            <Label row="1" col="3" text=" {{ newEvent.Event }} " ></Label>
-            <Button row="1" col="4" text= "Remove" (tap)="onRemove(newEvent)" style="background-color: orangered; margin-bottom: 5; text-align: justify" ></Button>
             </GridLayout>
+            <GridLayout class="testGrid" rows="auto" columns="60,*,60">
+                <!--<StackLayout class="testStack" row= "0" col="*, *, *" orientation="horizontal">-->
+                <Label style="margin-top: 10" text="   Event: " row="0" col="0"></Label>
+                <TextField class="event-textField" [(ngModel)]="events" hint="Event" row="0" col="1">
+                </TextField>
+                <Button class="submit-button" text="Add" row="0" col="2" (tap)="onTap(daysIndex, startTimeIndex, endTimeIndex, events)">
+            </Button>
+                <!--</StackLayout>  -->
+            </GridLayout>
+
+            <GridLayout rows="auto, auto" columns="80,50,50,*,90" height="50" class="title-text">
+                <Label row="0" colspan="5" style="margin-bottom: 10" text=" _____________________________________________________"></Label>
+                <Label row="1" col="0" class="title-text" text="   Day "></Label>
+                <Label row="1" col="1" class="title-text" text=" From "></Label>
+                <Label row="1" col="2" class="title-text" text=" To "></Label>
+                <Label row="1" col="3" class="title-text" text=" Event "></Label>
+                <Label row="1" col="4" class="title-text" text=""></Label>
+
+            </GridLayout>
+
+            <GridLayout rows="auto" columns="80,50,50,*,90" *ngFor="let newEvent of eventArray" height="25">
+                <Label row="1" col="0" text=" {{ newEvent.Day }}"></Label>
+                <Label row="1" col="1" text=" {{ newEvent.From }} "></Label>
+                <Label row="1" col="2" text=" {{ newEvent.To }} "></Label>
+                <Label row="1" col="3" text=" {{ newEvent.Event }} "></Label>
+                <Button row="1" col="4" text="Remove" (tap)="onRemove(newEvent)" style="background-color: orangered; margin-bottom: 5; text-align: justify"></Button>
+            </GridLayout>
+            <Button col="5" class="save-button" text="SAVE" (tap)="onSave(eventArray)"> 
+       </Button>
         </StackLayout>
 
     </ScrollView>
 </WrapLayout>
-
-
