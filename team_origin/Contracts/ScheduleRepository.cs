@@ -13,12 +13,7 @@ namespace team_origin.Contracts
 
         }
 
-        public ICollection<Event> GetScheduleByUserId(string UserId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool SaveSchedule(Schedule schedule)
+       public bool SaveSchedule(Schedule schedule)
         {
             var _uerSet = _dbContext.Set<UserEventRef>();
             try
@@ -39,6 +34,28 @@ namespace team_origin.Contracts
                 return false;
             }
             return true;
+        }
+
+       public Schedule GetScheduleByUserId(string UserId)
+        {
+            Schedule schedule = new Schedule();
+            List<Event> Events = new List<Event>();
+            try
+            {
+                Events = (from e in _dbContext.Event
+                          join uer in _dbContext.UserEventRef on e.EventId equals uer.EventId
+                          join u in _dbContext.Users on uer.UserId equals u.Id
+                          where u.Id == UserId
+                          select e
+                         ).ToList();
+                schedule.Events = Events;
+                schedule.UserId = UserId;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return schedule;
         }
     }
 }

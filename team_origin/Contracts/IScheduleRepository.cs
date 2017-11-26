@@ -9,6 +9,6 @@ namespace team_origin.Contracts
     public interface IScheduleRepository
     {
         bool SaveSchedule(Schedule schedule);
-        ICollection<Event>GetScheduleByUserId(string UserId);
+        Schedule GetScheduleByUserId(string UserId);
     }
 }

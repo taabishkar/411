@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using team_origin.Entities.Schedule;
 using team_origin.Contracts;
 using team_origin.Entities.Notifications;
+using team_origin.ViewModels;
 
 namespace team_origin.Controllers
 {
@@ -29,12 +30,31 @@ namespace team_origin.Controllers
             try
             {
                 bool saveSchedule = _scheduleRepository.SaveSchedule(schedule);
+                if (saveSchedule)
+                {
+                    return Ok();
+                }
+                return BadRequest();
             }
             catch (Exception e)
             {
                 return BadRequest();
             }
-            return Ok();
+        }
+
+        [HttpPost("get")]
+        public IActionResult GetScheduleByUserId([FromBody] GetMoodByUserViewModel user)
+        {
+            try
+            {
+               var schedule = _scheduleRepository.GetScheduleByUserId(user.UserId);
+               return Ok(schedule);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+            
         }
     }
 }
