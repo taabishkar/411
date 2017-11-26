@@ -10,5 +10,6 @@ namespace team_origin.Contracts
     {
         bool SaveSchedule(Schedule schedule);
         Schedule GetScheduleByUserId(string UserId);
+        Schedule UpdateSchedule(Schedule schedule);
     }
 }

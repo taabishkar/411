@@ -56,5 +56,20 @@ namespace team_origin.Controllers
             }
             
         }
+
+        [HttpPost("update")]
+        public IActionResult UpdateSchedule([FromBody] Schedule schedule)
+        {
+            try
+            {
+                var updatedSchedule = _scheduleRepository.UpdateSchedule(schedule);
+                return Ok(updatedSchedule);
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+
+        }
     }
 }

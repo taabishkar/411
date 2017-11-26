@@ -27,6 +27,7 @@ namespace team_origin.Contracts
                         UserId = schedule.UserId
                     };
                     _uerSet.Add(userEventRef);
+                    _dbContext.SaveChanges();
                 }
             }
             catch(Exception e)
@@ -56,6 +57,56 @@ namespace team_origin.Contracts
                 throw e;
             }
             return schedule;
+        }
+
+        public Schedule UpdateSchedule(Schedule schedule)
+        {
+            Schedule updatedSchedule = new Schedule();
+            List<Event> Events = new List<Event>();
+            try
+            {
+                //get the ref objs to be deleted
+                var deleteUER = (from e in _dbContext.Event
+                                      join uer in _dbContext.UserEventRef on e.EventId equals uer.EventId
+                                      join u in _dbContext.Users on uer.UserId equals u.Id
+                                      where u.Id == schedule.UserId
+                                      select uer
+                                     ).ToList();
+
+                //get the events to be deleted
+                var deleteEvents = (from e in _dbContext.Event
+                                 join uer in _dbContext.UserEventRef on e.EventId equals uer.EventId
+                                 join u in _dbContext.Users on uer.UserId equals u.Id
+                                 where u.Id == schedule.UserId
+                                 select e
+                                     ).ToList();
+
+                //delete ref objs
+                foreach (var UER in deleteUER)
+                {
+                    _dbContext.UserEventRef.Remove(UER);
+                }
+                _dbContext.SaveChanges();
+
+                //delete events
+                foreach (var e in deleteEvents)
+                {
+                    _dbContext.Event.Remove(e);
+                }
+                _dbContext.SaveChanges();
+
+                //save schedule and return the new schedule
+                if (SaveSchedule(schedule))
+                {
+                    updatedSchedule = GetScheduleByUserId(schedule.UserId);
+                    return updatedSchedule;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            return updatedSchedule;
         }
     }
 }
