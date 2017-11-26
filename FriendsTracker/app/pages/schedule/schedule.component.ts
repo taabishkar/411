@@ -5,6 +5,7 @@ import * as dialogs from 'ui/dialogs';
 import {Schedule} from './../../pages/schedule/schedule';
 import { SelectedIndexChangedEventData } from "nativescript-drop-down";
 
+
 @Component({
     selector: "schedule",
     providers: [],
@@ -13,7 +14,7 @@ import { SelectedIndexChangedEventData } from "nativescript-drop-down";
 })
 
 export class ScheduleComponent implements OnInit {
-
+   
     public daysIndex = 0;
     public days: Array<string>;
     public startTimeIndex = 0;
@@ -49,19 +50,23 @@ export class ScheduleComponent implements OnInit {
           console.log(`Drop Down selected index changed from ${args.oldIndex} to ${args.newIndex}`);
     }
 
-    public onTap(day : number, from: Number, to: Number, event: String){
+    public onTap(day : number, from: number, to: number, event: String){
         console.log("day is: " + day + " from: " + from + " to: " + to + " Event is: " + event);
         this.mySchedule = new Schedule();
         this.mySchedule.EventId = 0; 
-        this.mySchedule.From = from;
-        this.mySchedule.To = to;
+        this.mySchedule.From = from + 1;
+        this.mySchedule.To = to + 1;
         this.mySchedule.Event = event;
         this.mySchedule.Day = this.days[day];
-
         this.eventArray.push(this.mySchedule);
         console.dir(this.mySchedule);
+        console.dir(this.eventArray);
     }
-
+public onRemove(args: Schedule){
+    var index = this.eventArray.indexOf(args) ;
+    this.eventArray.splice(index,1);
+    console.dir(this.eventArray);
+}
     public onopen() {
         console.log("Drop Down opened.");
     }
