@@ -10,12 +10,11 @@ import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { AccordionModule } from "nativescript-accordion/angular";
 import { DropDownModule  } from "nativescript-drop-down/angular";
-
-
 import { AppComponent } from "./app.component";
 import { routes, navigatableComponents } from "./app.routing";
 import { LoginComponent } from "./pages/login/login.component";
 import { SearchPageComponent } from "./pages/search-page/search-page.component";
+import { ScheduleComponent } from "./pages/schedule/schedule.component";
 
 @NgModule({
   imports: [
@@ -36,7 +35,8 @@ import { SearchPageComponent } from "./pages/search-page/search-page.component";
     SearchPageComponent,
     DashBoardComponent,
     NotificationComponent,
-    FriendsComponent
+    FriendsComponent,
+    ScheduleComponent
   ],
 
   bootstrap: [

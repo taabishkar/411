@@ -1,0 +1,36 @@
+.dd-layout{
+    margin: 20 0 0 140;
+    font-size: 20;
+   
+}
+.dd-days{
+    text-align: center;  
+}
+
+.event-textField{
+  
+    margin-bottom: 10;
+}
+
+.label-alignment{
+    margin-top: 10;
+    margin-left: 10;
+}
+.dd-alignment{
+    margin-top: 10;
+    margin-left: 10;
+}
+.submit-button{
+    background-color: green;
+    height: 40;
+}
+
+/*.testGrid{
+    background-color: yellowgreen;
+}
+
+.testStack{
+    background-color: deeppink;
+    margin-left: 40;
+    margin-right: 40;
+}*/
