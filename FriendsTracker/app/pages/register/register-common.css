@@ -1,3 +1,14 @@
+WrapLayout{
+background-image: url("res://mountain");
+background-repeat: no-repeat;
+background-position: center;
+background
+}
+ActionBar {
+    background-color:  #23419B;
+    color: white;
+}
+
 Button, TextField {
     margin-left: 6;
     margin-right: 6;

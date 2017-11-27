@@ -1,5 +1,12 @@
+WrapLayout{
+background-image: url("res://mountain");
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+}
+
 ActionBar {
-    background-color:  #3C5AFD;
+    background-color:  #23419B;
     color: white;
 }
 
@@ -10,7 +17,7 @@ ActionBar {
 }
 
 .side-drawer{
-    background-color: #41719A;
+    background-color: #23419B;
     color: white;
     margin-right: 150;
 }
@@ -26,11 +33,14 @@ ActionBar {
     background-color: green;
 }
 .friend-name{
+    margin-top: 10;
     font-size: 15;
+    margin-left: 80;
     font-family: "Sansation-Light";
+    color: #083B6F;
 }
 .profile-image{
-    margin: 20px 15px 20px 15px;
+    margin: 20 15 20 40;
     border-radius: 30;
     border-color: gray;
     border-width: 10;
@@ -38,9 +48,19 @@ ActionBar {
     width:260;
   }
   .mood-view{
-      margin-top:5px;
+      margin-top: 10;
+      margin-left: 5;
+      font-size: 15;
       font-weight: bold;
+      color: #23419B;
   }
+  .mood-btn{
+    background-color:  #23419B;
+    color: ghostwhite;
+    margin-left: 30;
+    margin-top: 10;
+  }
+
   .edit-button{
       height: 50;
       width:50;

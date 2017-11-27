@@ -1,3 +1,13 @@
+WrapLayout{
+background-image: url("res://mountain");
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+}
+ActionBar {
+    background-color:  #23419B;
+    color: white;
+}
 .dd-layout{
     margin: 20 0 0 10;
     font-size: 18;
@@ -19,12 +29,14 @@
     margin-top: 0;
     margin-left: 10;
     text-align: center;
+    /*width: 150px;
+    background-color: mediumvioletred;*/
 }
 .submit-button{
     height: 40;
 }
 .save-button{
-    margin: 10 0 10 40;
+    margin: 10 0 10 30;
     width: 30%;
 }
 .title-text{

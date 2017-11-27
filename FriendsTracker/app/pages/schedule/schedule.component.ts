@@ -6,6 +6,7 @@ import { Schedule, ScheduleViewModel } from './../../pages/schedule/schedule';
 import { SelectedIndexChangedEventData } from "nativescript-drop-down";
 import { Config } from "./../../shared/config";
 import { ScheduleService } from "./../../pages/schedule/schedule.service";
+import { TimePicker } from "tns-core-modules/ui/time-picker/time-picker";
 
 
 @Component({
@@ -20,9 +21,9 @@ export class ScheduleComponent implements OnInit {
     public daysIndex = 0;
     public days: Array<string>;
     public startTimeIndex = 0;
-    public startTime: Array<Number>;
+    public startTime: Array<string> = [];
     public endTimeIndex = 0;
-    public endTime: Array<Number>;
+    public endTime: Array<string> = [];
     public events: String;
     public mySchedule: Schedule;
     public eventArray: Array<Schedule>=[];
@@ -30,10 +31,18 @@ export class ScheduleComponent implements OnInit {
 
     constructor(private router: Router, private routerExtensions: RouterExtensions, private scheduleService : ScheduleService) {
         this.days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        this.startTime = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
-        this.endTime = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+        this.startTime = this.InitializeStartTime(1,24);
+        this.endTime = this.InitializeStartTime(1,24);
     }
     ngOnInit() {
+    }
+
+   InitializeStartTime(startIndex: number, endIndex:number){
+       var result = new Array<string>();
+       for (var i = startIndex; i <= endIndex; i++){
+            result.push("  "+ i + "  ");
+       }
+        return result;
     }
 
     GoBack() {

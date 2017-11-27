@@ -1,28 +1,29 @@
-<ActionBar>
+<ActionBar title= "DashBOard" >
   <label class="font-awesome" text="&#xf0c9;" (tap)="tapped()"></label>
 </ActionBar>
 <WrapLayout>
   <ScrollView>
-    <StackLayout>  
-            <StackLayout *ngIf="!editClicked">             
-              <label text="Current Mood:"></label>
-              <label text="{{mood}}" class="mood-view"></label>
-              <Button text="{{moodAction}}" (tap)="editMood()" class=""></Button>
-            </StackLayout>
-            <StackLayout *ngIf="editClicked">
-                <label text="Current Mood:"></label>
-                <TextView hint="I'm feeling..." [(ngModel)]="userMood.moodDescription"></TextView>
-                <Button text="Update Mood" class="update-mood" (tap)="setMood()"></Button>
-            </StackLayout>          
+    <StackLayout >                   
         <Image src="res://testwallpaper" stretch="none" horizontalAlignment="center" class="profile-image"></Image>
-        <label text="User: {{dashboardItem.firstname}}  {{dashboardItem.lastname}}" horizontalAlignment="center" class="friend-name"></label>
-        <label text="Phone Number: {{dashboardItem.phonenumber}}" horizontalAlignment="center" class="friend-name"></label>
+        <label text="USER: {{dashboardItem.firstname}}  {{dashboardItem.lastname}}"  class="friend-name"></label>
+        <label text="PHONE NUMBER: {{dashboardItem.phonenumber}}" class="friend-name"></label>
+
+        <StackLayout *ngIf="!editClicked" >   
+            <StackLayout orientation="horizontal" style="margin-block-start: 10">
+            <label class="friend-name" text="CURRENT MOOD:"></label>
+            <label text="{{mood}}" class="mood-view"></label>
+                </StackLayout>          
+            <Button text="{{moodAction}}" (tap)="editMood()" class="mood-btn"></Button>
+           </StackLayout>
+            <StackLayout *ngIf="editClicked"style="margin-bottom: 10;">
+              <label class="friend-name" text="CURRENT MOOD:"></label>
+                <TextView hint="I'm feeling..." [(ngModel)]="userMood.moodDescription" style="margin-left: 80; color: #23419B;"></TextView>
+                  <Button text="Update Mood" class="mood-btn" (tap)="setMood()"></Button>
+            </StackLayout>  
     </StackLayout>
   </ScrollView>
 </WrapLayout>
 <StackLayout class="side-drawer" *ngIf="isTapped">
-  <label class="menu-list" text="Home">
-      </label>
   <label class="menu-list" text ="Notifications ({{Notifications.length}})" [nsRouterLink]="['/notification']"></label>
   <label class="menu-list" text="Search Friends" [nsRouterLink]="['/search-page']">
       </label>
