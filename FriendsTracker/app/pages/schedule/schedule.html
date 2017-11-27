@@ -43,16 +43,15 @@
 
             </GridLayout>
 
-            <GridLayout rows="auto" columns="80,50,50,*,90" *ngFor="let newEvent of eventArray" height="25">
-                <Label row="1" col="0" text=" {{ newEvent.Day }}"></Label>
+            <GridLayout rows="auto" columns="80,50,50,*,90" *ngFor="let newEvent of eventArray" height="35">
+                <Label row="1" col="0" text=" {{ days[newEvent.DayId] }}"></Label>
                 <Label row="1" col="1" text=" {{ newEvent.From }} "></Label>
                 <Label row="1" col="2" text=" {{ newEvent.To }} "></Label>
-                <Label row="1" col="3" text=" {{ newEvent.Event }} "></Label>
-                <Button row="1" col="4" text="Remove" (tap)="onRemove(newEvent)" style="background-color: orangered; margin-bottom: 5; text-align: justify"></Button>
+                <Label row="1" col="3" text=" {{ newEvent.EventDescription }} "></Label>
+                <Label row="1" col="4" text="&#xf00d;" (tap)="onRemove(newEvent)" style="color: orangered; font-size: 40%; font-weight: bold;"></Label>
             </GridLayout>
             <Button col="5" class="save-button" text="SAVE" (tap)="onSave(eventArray)"> 
        </Button>
         </StackLayout>
-
     </ScrollView>
 </WrapLayout>

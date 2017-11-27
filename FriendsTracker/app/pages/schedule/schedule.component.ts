@@ -5,11 +5,12 @@ import * as dialogs from 'ui/dialogs';
 import { Schedule, ScheduleViewModel } from './../../pages/schedule/schedule';
 import { SelectedIndexChangedEventData } from "nativescript-drop-down";
 import { Config } from "./../../shared/config";
+import { ScheduleService } from "./../../pages/schedule/schedule.service";
 
 
 @Component({
     selector: "schedule",
-    providers: [],
+    providers: [ScheduleService],
     templateUrl: "pages/schedule/schedule.html",
     styleUrls: ["pages/schedule/schedule.common.css"]
 })
@@ -27,7 +28,7 @@ export class ScheduleComponent implements OnInit {
     public eventArray: Array<Schedule>=[];
     public userSchedule: ScheduleViewModel;
 
-    constructor(private router: Router, private routerExtensions: RouterExtensions) {
+    constructor(private router: Router, private routerExtensions: RouterExtensions, private scheduleService : ScheduleService) {
         this.days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         this.startTime = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
         this.endTime = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
@@ -60,8 +61,8 @@ export class ScheduleComponent implements OnInit {
         this.mySchedule.EventId = 0;
         this.mySchedule.From = from + 1;
         this.mySchedule.To = to + 1;
-        this.mySchedule.Event = event;
-        this.mySchedule.Day = this.days[day];
+        this.mySchedule.EventDescription = event;
+        this.mySchedule.DayId = day;
         this.eventArray.push(this.mySchedule);
         this.reset();
         console.dir(this.mySchedule);
@@ -82,9 +83,13 @@ export class ScheduleComponent implements OnInit {
     public onSave(eventArray: Array<Schedule>){
         this.userSchedule = new ScheduleViewModel();
         this.userSchedule.userId = Config.fromUserId;
-        this.userSchedule.scheduleArray = eventArray;
+        this.userSchedule.events = eventArray;
         console.dir(this.userSchedule);
+        console.log("UserId: "+ this.userSchedule.userId);
+        console.log("UserId: "+ Config.fromUserId);
+        this.getNotifications(this.userSchedule);
     }
+
 
     public onopen() {
         console.log("Drop Down opened.");
@@ -92,5 +97,21 @@ export class ScheduleComponent implements OnInit {
 
     public onclose() {
         console.log("Drop Down closed.");
+    }
+
+     getNotifications(item) {
+        this.scheduleService.saveSchedule(item)
+            .subscribe(
+            (res) => {   
+               dialogs.alert({
+                    title: "Success",
+                    message: "Schedule Saved!",
+                    okButtonText: "Ok"
+                });         
+            },
+            (error) => {
+                console.log(error);
+            }
+            );
     }
 }

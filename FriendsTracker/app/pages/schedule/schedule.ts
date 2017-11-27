@@ -1,13 +1,12 @@
 export class Schedule {
-    Day: String;
+    DayId: Number;
     From: Number;
     To: Number;
-    Event: String;
+    EventDescription: String;
     EventId: Number;
-    CountId: number;
 }
 
 export class ScheduleViewModel {
-    public scheduleArray: Array<Schedule>;
+    public events: Array<Schedule>;
     public userId: String;
 }

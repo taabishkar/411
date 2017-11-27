@@ -8,7 +8,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { VerificationCodeComponent } from './pages/verification-code/verification-code.component';
 
 export const routes = [
-  // { path: "schedule", component: LoginComponent }, 
+  { path: "", component: LoginComponent }, 
   { path: "dashboard", component: DashBoardComponent }, 
   { path: "search-page", component: SearchPageComponent }, 
   {path: "register", component: RegisterComponent},
@@ -16,7 +16,7 @@ export const routes = [
   {path: "search-page", component: SearchPageComponent},
   {path: "notification", component: NotificationComponent},
   {path: "friends", component: FriendsComponent},
-  {path: "", component: ScheduleComponent}
+  {path: "schedule", component: ScheduleComponent}
 ];
 
 export const navigatableComponents = [
