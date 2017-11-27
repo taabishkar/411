@@ -62,12 +62,15 @@ namespace team_origin
 
             services.AddMvc();
 
-            services.AddMvc().AddJsonOptions(options => {
+            services.AddMvc().AddJsonOptions(options =>
+            {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
             services.AddDbContext<TeamOriginContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            options.UseSqlServer(Configuration.GetConnectionString("azureConnection")));
 
             services.AddIdentity<User, IdentityRole>()
             .AddEntityFrameworkStores<TeamOriginContext>()
@@ -82,7 +85,7 @@ namespace team_origin
 
             services.AddTransient<IVerificationCodeSenderService, VerificationCodeSenderService>();
 
-            
+
 
         }
 
