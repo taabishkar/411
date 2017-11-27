@@ -80,7 +80,10 @@ namespace team_origin.Controllers
 
             var returnUser = new UserResult
             {
-                Id = savedUser.Id
+                Id = savedUser.Id,
+                FirstName = savedUser.FirstName,
+                LastName = savedUser.LastName,
+                PhoneNumber = savedUser.PhoneNumber
             };
 
             return Ok(returnUser);

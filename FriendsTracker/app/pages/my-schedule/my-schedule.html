@@ -1,0 +1,21 @@
+<ActionBar title="My Schedule">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="GoBack()"></NavigationButton>
+</ActionBar>
+<ScrollView>
+    <StackLayout>
+        <GridLayout rows="*" columns="100,50,50,*" height="30" class="grid-header">
+            <label row="0" col="0" text="Day"></label>
+            <label row="0" col="1" text="From"></label>
+            <label row="0" col="2" text="To"></label>
+            <label row="0" col="3" text="Event Details"></label>
+        </GridLayout>
+        <WrapLayout>
+            <GridLayout *ngFor="let event of schedule" rows="*" columns="100,50,50,*" height="20" class="grid-data">
+                <label row="0" col="0" text="{{WeekDays[event.dayId]}}"></label>
+                <label row="0" col="1" text="{{event.from}}"></label>
+                <label row="0" col="2" text="{{event.to}}"></label>
+                <label row="0" col="3" text="{{event.eventDescription}}"></label>
+            </GridLayout>
+        </WrapLayout>
+    </StackLayout>
+</ScrollView>

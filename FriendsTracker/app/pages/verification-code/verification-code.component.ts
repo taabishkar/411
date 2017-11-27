@@ -38,8 +38,11 @@ export class VerificationCodeComponent implements OnInit {
     sendVerificationCode() {
         this.userService.sendVerificationCode(this.verificationcode)
             .subscribe(
-            () => {
+            (res) => {
                 this.isRequesting = false;
+                Config.firstName = res.firstName;
+                Config.lastName = res.lastName;
+                Config.phoneNumber = res.phoneNumber;
                  this.routerExtensions.navigate(["/dashboard"], { clearHistory: true });
             },
             (error) => {

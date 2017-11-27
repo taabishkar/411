@@ -1,3 +1,4 @@
+import { MyScheduleComponent } from './pages/my-schedule/my-schedule.component';
 import { FriendsComponent } from './pages/friends/friends.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { DashBoardComponent } from './pages/dashboard/dashboard.component';
@@ -16,7 +17,8 @@ export const routes = [
   {path: "search-page", component: SearchPageComponent},
   {path: "notification", component: NotificationComponent},
   {path: "friends", component: FriendsComponent},
-  {path: "schedule", component: ScheduleComponent}
+  {path: "schedule", component: ScheduleComponent},
+  {path: "my-schedule", component: MyScheduleComponent}
 ];
 
 export const navigatableComponents = [
@@ -27,5 +29,6 @@ export const navigatableComponents = [
   DashBoardComponent,
   NotificationComponent,
   FriendsComponent,
-  ScheduleComponent
+  ScheduleComponent,
+  MyScheduleComponent
 ];

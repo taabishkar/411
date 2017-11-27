@@ -25,8 +25,8 @@ export class SearchPageComponent implements OnInit {
     public fullname: string;
     public addfriend = new AddFriend();
     public isWorking: boolean = false;
-    public responseReceived : boolean = false;
-    ngOnInit(){
+    public responseReceived: boolean = false;
+    ngOnInit() {
 
     }
 
@@ -34,60 +34,61 @@ export class SearchPageComponent implements OnInit {
         this.searchfriends = new SearchFriends();
     }
 
-    searchFriendsCall(){
-       this.isWorking = true;
-       this.searchfriends.UserId = Config.fromUserId;
-       console.dir(this.searchfriends);
-       this.searchFriends();
+    searchFriendsCall() {
+        this.isWorking = true;
+        this.searchfriends.UserId = Config.fromUserId;
+        console.dir(this.searchfriends);
+        this.searchFriends();
     }
 
-    
-        searchFriends() {
-            this.friendService.search(this.searchfriends)
-                .subscribe(
-                (res) => {
-                    this.responseReceived = true;
-                    this.isWorking = false;
-                   console.dir(res);
-                   this.searchFriendsResponse = res;
-                   this.fullname = this.searchFriendsResponse.firstName + " "+ this.searchFriendsResponse.lastName;
-                   Config.toUserId = res.id;
-                },
-                (error) => {
-                    this.isWorking = false;
-                    console.log(error);
-                    dialogs.alert({
-                        title: "Error",
-                        message: "Invalid Username/Password combination.",
-                        okButtonText: "Ok"
-                    }).then(() => {
-                        console.log("Dialog closed!");
-                    });
-                }
-                );
-    
-        }
 
-        addFriendCall(){
-            this.isWorking = true;
-            this.addFriend();
-            
-        }
+    searchFriends() {
+        this.friendService.search(this.searchfriends)
+            .subscribe(
+            (res) => {
+                this.responseReceived = true;
+                this.isWorking = false;
+                console.dir(res);
+                this.searchFriendsResponse = res;
+                this.fullname = this.searchFriendsResponse.firstName + " " + this.searchFriendsResponse.lastName;
+                Config.toUserId = res.id;
+            },
+            (error) => {
+                this.isWorking = false;
+                console.log(error);
+                dialogs.alert({
+                    title: "Error",
+                    message: "Invalid Username/Password combination.",
+                    okButtonText: "Ok"
+                }).then(() => {
+                    console.log("Dialog closed!");
+                });
+            }
+            );
 
-        addFriend(){
-            this.addfriend.FromUserId = Config.fromUserId;
-            this.addfriend.ToUserId = Config.toUserId;
-            this.friendService.addFriend(this.addfriend)
+    }
+
+    addFriendCall() {
+        this.isWorking = true;
+        this.addFriend();
+
+    }
+
+    addFriend() {
+        this.addfriend.FromUserId = Config.fromUserId;
+        this.addfriend.ToUserId = Config.toUserId;
+        this.friendService.addFriend(this.addfriend)
             .subscribe(
             (res) => {
                 this.isWorking = false;
-               dialogs.alert({
-                title: "Success",
-                message: "Your request has been sent.",
-                okButtonText: "Ok"
-            }).then(() => {
-                console.log("Dialog closed!");
-            });
+                dialogs.alert({
+                    title: "Success",
+                    message: "Your request has been sent.",
+                    okButtonText: "Ok"
+                }).then(() => {
+                    this.searchFriendsResponse.friendhipStatus = "Pending";
+                    console.log("Dialog closed!");
+                });
             },
             (error) => {
                 this.isWorking = false;
@@ -102,12 +103,12 @@ export class SearchPageComponent implements OnInit {
             }
             );
 
-        }
+    }
 
-        GoBack(){
-            console.log("Back tapped.");
-            this.routerExtensions.navigate([""], { clearHistory: true });
-        }
-    
+    GoBack() {
+        console.log("Back tapped.");
+        this.routerExtensions.navigate([""], { clearHistory: true });
+    }
+
 
 }

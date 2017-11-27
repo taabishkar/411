@@ -1,3 +1,4 @@
+import { MyScheduleComponent } from './pages/my-schedule/my-schedule.component';
 import { FriendsComponent } from './pages/friends/friends.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 import { DashBoardComponent } from './pages/dashboard/dashboard.component';
@@ -15,6 +16,7 @@ import { routes, navigatableComponents } from "./app.routing";
 import { LoginComponent } from "./pages/login/login.component";
 import { SearchPageComponent } from "./pages/search-page/search-page.component";
 import { ScheduleComponent } from "./pages/schedule/schedule.component";
+import { GridViewModule } from "nativescript-grid-view/angular";
 
 @NgModule({
   imports: [
@@ -24,6 +26,7 @@ import { ScheduleComponent } from "./pages/schedule/schedule.component";
     NativeScriptRouterModule,
     AccordionModule,
     DropDownModule,
+    GridViewModule,
     NativeScriptRouterModule.forRoot(routes)
   ],
 
@@ -36,7 +39,8 @@ import { ScheduleComponent } from "./pages/schedule/schedule.component";
     DashBoardComponent,
     NotificationComponent,
     FriendsComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    MyScheduleComponent
   ],
 
   bootstrap: [
