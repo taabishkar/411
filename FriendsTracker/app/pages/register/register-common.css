@@ -2,7 +2,7 @@ WrapLayout{
 background-image: url("res://mountain");
 background-repeat: no-repeat;
 background-position: center;
-background
+background-size: cover;
 }
 ActionBar {
     background-color:  #23419B;
@@ -46,8 +46,8 @@ Button, TextField {
   }
   
   .btn-outline{
-    background-color:transparent;
-    border: none;
+    color:black;
+    margin-bottom: 15;
   }
   
   .hand-image{
@@ -62,7 +62,7 @@ Button, TextField {
   }
   
   .icons-extra-actions{
-    color: gray;
+    color: black;
     margin-top:3;
   }
   
