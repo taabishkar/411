@@ -19,7 +19,18 @@ export class MyScheduleService {
             Config.apiUrl + 'schedule/get',body
         )
         .catch(this.handleErrors);
-    }          
+    }  
+    getFriendsScheduleAndMood(friendsUserId) {
+        let userId = new SendMood();
+        userId.UserId = friendsUserId;
+        let headers = new Headers();
+         headers.append("Content-Type", "application/json");
+        let body = userId;
+        return this.http.post(
+            Config.apiUrl + 'schedule/get/friend',body
+        )
+        .catch(this.handleErrors);
+    }            
     handleErrors(error: Response) {
         console.log(error);
         return Observable.throw(error);

@@ -4,7 +4,7 @@
     <WrapLayout>
             <ListView [items]="friends">
                 <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
-                    <StackLayout [class.odd]="odd" [class.even]="even">
+                    <StackLayout [class.odd]="odd" [class.even]="even" (tap)="ShowFriendsDetail(item.userId, item.fullName)">
                         <Label text='{{item.fullName}}' class="fullName" width="100%"></Label>
                         <Label text='{{item.phone}}' class="phone" width="100%"></Label>                        
                     </StackLayout>

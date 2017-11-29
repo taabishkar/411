@@ -1,0 +1,28 @@
+.friend-name{
+    margin-top: 10;
+    font-size: 15;
+    margin-left: 80;
+    font-family: "Sansation-Light";
+    color: #083B6F;
+}
+.mood-view{
+      margin-top: 10;
+      margin-left: 5;
+      font-size: 15;
+      font-weight: bold;
+      color: #23419B;
+  }
+  .grid-header {
+    font-weight: bold;
+    font-size: 18;
+    text-align: center;
+    vertical-align: center;
+    color: white;
+    background-color: #1C6CC3;
+}
+
+.grid-data {
+    color: black;
+    text-align: center;
+    background-color: whitesmoke;
+}

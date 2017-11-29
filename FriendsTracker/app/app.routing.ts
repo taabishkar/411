@@ -7,6 +7,7 @@ import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { VerificationCodeComponent } from './pages/verification-code/verification-code.component';
+import { FriendDetailsComponent } from './pages/friend-details/friend-details.component';
 
 export const routes = [
   { path: "", component: LoginComponent }, 
@@ -18,7 +19,8 @@ export const routes = [
   {path: "notification", component: NotificationComponent},
   {path: "friends", component: FriendsComponent},
   {path: "schedule", component: ScheduleComponent},
-  {path: "my-schedule", component: MyScheduleComponent}
+  {path: "my-schedule", component: MyScheduleComponent},
+  {path: "friend-details", component: FriendDetailsComponent}
 ];
 
 export const navigatableComponents = [
@@ -30,5 +32,6 @@ export const navigatableComponents = [
   NotificationComponent,
   FriendsComponent,
   ScheduleComponent,
-  MyScheduleComponent
+  MyScheduleComponent,
+  FriendDetailsComponent
 ];

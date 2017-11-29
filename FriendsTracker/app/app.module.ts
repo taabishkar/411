@@ -17,6 +17,7 @@ import { LoginComponent } from "./pages/login/login.component";
 import { SearchPageComponent } from "./pages/search-page/search-page.component";
 import { ScheduleComponent } from "./pages/schedule/schedule.component";
 import { GridViewModule } from "nativescript-grid-view/angular";
+import { FriendDetailsComponent } from "./pages/friend-details/friend-details.component";
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { GridViewModule } from "nativescript-grid-view/angular";
     NotificationComponent,
     FriendsComponent,
     ScheduleComponent,
-    MyScheduleComponent
+    MyScheduleComponent,
+    FriendDetailsComponent
   ],
 
   bootstrap: [

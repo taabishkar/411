@@ -1,3 +1,4 @@
+import { Config } from './../../shared/config';
 import { Friend } from './../../shared/friends/friend';
 import { itemsProperty } from 'tns-core-modules/ui/segmented-bar';
 import { Router } from '@angular/router';
@@ -36,7 +37,11 @@ export class FriendsComponent implements OnInit {
             }
         );
     }
-    
+    ShowFriendsDetail(userId, fullName){
+        Config.currentFriendId = userId;
+        Config.currentFriendFullName = fullName;
+        this.routerExtensions.navigate(["friend-details"]);
+    }
     GoBack(){
         console.log("Back tapped.");
         this.routerExtensions.navigate([""], { clearHistory: true });
