@@ -16,6 +16,8 @@ import { MyScheduleService } from './../../shared/user/mySchedule.service';
 export class MyScheduleComponent implements OnInit {
     WeekDays = WeekDays;
     public schedule: Schedule[] = [];
+    public buttonText: string = '';
+    public IsEdit: boolean = false;
     constructor(private router: Router, private routerExtensions: RouterExtensions, private myScheduleService: MyScheduleService) {
     }
 
@@ -32,6 +34,13 @@ export class MyScheduleComponent implements OnInit {
                     this.schedule = res._body.events;
                     console.log("Schedule: here")
                     console.dir(this.schedule);
+                    if(res._body.events.length != 0){
+                        this.buttonText = "Edit Schedule";
+                        this.IsEdit = true;
+                    } else{
+                        this.buttonText = "Add Schedule";
+                    }
+                    
                 }
             },
             (error) => {
