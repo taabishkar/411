@@ -65,7 +65,7 @@ namespace team_origin.Controllers
             }
 
             //var verificationcode = await _verificationCodeSenderService.SendSmsAsync(user.PhoneNumber);
-            string verificationcode = "12345";
+            string verificationcode = "67140";
 
             var savedUser = await _userManager.FindByNameAsync(user.UserName);
 
