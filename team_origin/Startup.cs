@@ -68,9 +68,9 @@ namespace team_origin
             });
 
             services.AddDbContext<TeamOriginContext>(options =>
-            //  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            options.UseSqlServer(Configuration.GetConnectionString("azureConnection")));
+            //options.UseSqlServer(Configuration.GetConnectionString("azureConnection")));
 
             services.AddIdentity<User, IdentityRole>()
             .AddEntityFrameworkStores<TeamOriginContext>()

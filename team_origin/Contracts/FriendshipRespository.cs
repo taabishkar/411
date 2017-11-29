@@ -19,12 +19,12 @@ namespace team_origin.Contracts
             string friendshipcheck = CheckFriendship(FromUserId, ToUserId);
             if (friendshipcheck == "Not Friends")
             {
-                //make sure friendstatus id is correct. Friendship status id shoould be the id for pending. 
+                //make sure friendstatus id is correct. Friendship status id should be the id for pending. 
                 var friendship = new Friendship
                 {
                     FromUserId = FromUserId,
                     ToUserId = ToUserId,
-                    FriendshipStatusId = 0
+                    FriendshipStatusId = 1
                 };
 
                 _dbSet.Add(friendship);
@@ -61,13 +61,13 @@ namespace team_origin.Contracts
                 var friendIds = ((from f in _dbContext.Friendship
                                  join u in _dbContext.Users on f.FromUserId equals u.Id
                                  where 
-                                 f.FromUserId == UserId && f.FriendshipStatusId == 1
+                                 f.FromUserId == UserId && f.FriendshipStatusId == 2
                                  select f.ToUserId)
                                  .Union
                                 (from f1 in _dbContext.Friendship
                                  join u in _dbContext.Users on f1.ToUserId equals u.Id
                                  where
-                                      f1.ToUserId == UserId && f1.FriendshipStatusId == 1
+                                      f1.ToUserId == UserId && f1.FriendshipStatusId == 2
                                  select f1.FromUserId)).ToList();
 
                 if(friendIds != null)

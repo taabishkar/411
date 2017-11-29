@@ -49,7 +49,7 @@ namespace team_origin.Contracts
                           where u.Id == UserId
                           select e
                          ).ToList();
-                schedule.Events = Events;
+                schedule.Events = Events.OrderBy(o => o.DayId).ThenBy(o => o.From).ToList();
                 schedule.UserId = UserId;
             }
             catch (Exception e)

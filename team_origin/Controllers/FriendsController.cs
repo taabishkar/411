@@ -125,8 +125,8 @@ namespace team_origin.Controllers
 
                 if (friendship != null)
                 {
-                    //If friendship object exists, change the status to 1: Accepted!
-                    friendship.FriendshipStatusId = 1;
+                    //If friendship object exists, change the status to 2: Accepted!
+                    friendship.FriendshipStatusId = 2;
                     _friendshipRepository.Update(friendship);
 
                     //Update the acknowledgement status of the original notification
@@ -179,8 +179,8 @@ namespace team_origin.Controllers
 
                 if (friendship != null)
                 {
-                    //Update the friendship status to 2: Rejected!
-                    friendship.FriendshipStatusId = 2;
+                    //Update the friendship status to 3: Rejected!
+                    friendship.FriendshipStatusId = 3;
                     _friendshipRepository.Update(friendship);
 
                     //Update the acknowledgement status of the notification
