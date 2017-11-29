@@ -10,18 +10,21 @@ ActionBar {
     color: white;
 }
 
-.odd {
-    background-color: red;
-}
-
-.even {
-    background-color: blue;    
-}
 .fullName{
-    font-size: 15;
-    color: white;  
+    font-size: 18;
+   color: #23419B;
+    margin-left: 70;
+    font-weight: bold;
 }
 .phone{
-    font-size: 10;
-    color: white;
+    font-size: 12;
+    color: #23419B;
+    margin-left: 70;
+    font-weight: bold;
+}
+.profile-image{
+    width: 10%;
+    height: 20;
+    border-radius: 30;
+    border-color: gray;
 }

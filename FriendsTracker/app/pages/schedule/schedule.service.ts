@@ -15,7 +15,7 @@ export class ScheduleService {
          headers.append("Content-Type", "application/json");       
         let body = item;
         return this.http.post(
-            Config.apiUrl + 'schedule/save', body
+            Config.apiUrl + 'Schedule/save', body
         )
         .catch(this.handleErrors);
      }     
@@ -24,5 +24,4 @@ export class ScheduleService {
         console.log(error + 'Randakhal');
         return Observable.throw(error);
     }
-
 }

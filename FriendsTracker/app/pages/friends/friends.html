@@ -4,9 +4,12 @@
     <WrapLayout>
             <ListView [items]="friends">
                 <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
-                    <StackLayout [class.odd]="odd" [class.even]="even" (tap)="ShowFriendsDetail(item.userId, item.fullName)">
-                        <Label text='{{item.fullName}}' class="fullName" width="100%"></Label>
-                        <Label text='{{item.phone}}' class="phone" width="100%"></Label>                        
+                    <StackLayout orientation="horizontal">
+                    <Image src="res://testwallpaper" stretch="none" horizontalAlignment="center" class="profile-image"></Image>
+                    <StackLayout [class.odd]="odd" [class.even]="even">
+                        <Label text='{{item.fullName}}' class="fullName" width="auto"></Label>
+                        <Label text='{{item.phone}}' class="phone" width="auto"></Label>                        
+                    </StackLayout>
                     </StackLayout>
                 </ng-template>
             </ListView>
