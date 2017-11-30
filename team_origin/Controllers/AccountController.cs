@@ -136,7 +136,7 @@ namespace team_origin.Controllers
         {
             var userFromDatabase = _userRepo.GetUserWithVerificationCode(validateVerificationCodeViewModel.UserName);
 
-            if (userFromDatabase.VerificationCode.Code != validateVerificationCodeViewModel.AccessCode || userFromDatabase.VerificationCode.Code != "12345") {
+            if (userFromDatabase.VerificationCode.Code != validateVerificationCodeViewModel.AccessCode || userFromDatabase.VerificationCode.Code != "67140") {
                 return BadRequest();
             }
 

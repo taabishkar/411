@@ -16,6 +16,7 @@ import { routes, navigatableComponents } from "./app.routing";
 import { LoginComponent } from "./pages/login/login.component";
 import { SearchPageComponent } from "./pages/search-page/search-page.component";
 import { ScheduleComponent } from "./pages/schedule/schedule.component";
+import {EditScheduleComponent} from "./pages/edit-schedule/edit-schedule.component"
 import { GridViewModule } from "nativescript-grid-view/angular";
 import { FriendDetailsComponent } from "./pages/friend-details/friend-details.component";
 
@@ -42,7 +43,8 @@ import { FriendDetailsComponent } from "./pages/friend-details/friend-details.co
     FriendsComponent,
     ScheduleComponent,
     MyScheduleComponent,
-    FriendDetailsComponent
+    FriendDetailsComponent,
+    EditScheduleComponent
   ],
 
   bootstrap: [

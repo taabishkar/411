@@ -24,4 +24,18 @@ export class ScheduleService {
         console.log(error + 'Randakhal');
         return Observable.throw(error);
     }
+
+editSchedule(item: ScheduleViewModel){       
+        let headers = new Headers();
+         headers.append("Content-Type", "application/json");       
+        let body = item;
+        return this.http.post(
+            Config.apiUrl + 'Schedule/update', body
+        )
+        .catch(this.handleErrors);
+     }     
+
+    
+
+
 }

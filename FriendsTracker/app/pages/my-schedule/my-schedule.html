@@ -22,6 +22,6 @@
     </ScrollView>
     <StackLayout>
         <Button *ngIf="!IsEdit" class="schedule-button" text="{{buttonText}}" [nsRouterLink]="['/schedule']"></Button>
-        <Button *ngIf="IsEdit" class="schedule-button" text="{{buttonText}}" [nsRouterLink]="['']"></Button>
+        <Button *ngIf="IsEdit" class="schedule-button" text="{{buttonText}}" [nsRouterLink]="['/edit-schedule']"></Button>
     </StackLayout>
 </StackLayout>

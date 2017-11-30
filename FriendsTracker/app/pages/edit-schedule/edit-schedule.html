@@ -1,4 +1,4 @@
-<ActionBar title="My Schedule">
+<ActionBar title="Edit Schedule">
     <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="GoBack()"></NavigationButton>
 </ActionBar>
 
@@ -10,8 +10,6 @@
                     <DropDown class="dd-days" [items]="days" [(ngModel)]="daysIndex" (selectedIndexChanged)="onchangeDays($event)" (opened)="onopen()"
                         (closed)="onclose()"></DropDown>
                     <Label class="label-alignment" text="From: " row="0" col="0"></Label>
-
-                    <!--<TimePicker col="1" text="choose" (loaded)="onPickerLoaded($event)" style="background-color: red"></TimePicker>-->
 
                     <DropDown class="dd-alignment" [items]="startTime" [(ngModel)]="startTimeIndex"
                      (selectedIndexChanged)="onchangeStartTime($event)"
@@ -45,14 +43,15 @@
 
             </GridLayout>
 
-            <GridLayout rows="auto" columns="80,50,50,*,50" *ngFor="let newEvent of eventArray" height="35">
+            <GridLayout rows="auto" columns="80,50,50,*,50,50" *ngFor="let newEvent of eventArray" height="35">
                 <Label row="1" col="0" text=" {{ days[newEvent.dayId] }}"></Label>
                 <Label row="1" col="1" text=" {{ newEvent.from }} "></Label>
                 <Label row="1" col="2" text=" {{ newEvent.to }} "></Label>
                 <Label row="1" col="3" text=" {{ newEvent.eventDescription }} "></Label>
                 <Label row="1" col="4" class="font-awesome" text="&#xf056;" (tap)="onRemove(newEvent)" style="color: orangered; font-size: 20%"></Label>
+                <Label row="1" col="5" class="font-awesome" text="&#xF044;" (tap)="onEdit(newEvent)" style="color: green; font-size: 20%"></Label>
             </GridLayout>
-            <Button col="5" class="save-button" text="SAVE" (tap)="onSave(eventArray)"> 
+            <Button col="5" class="save-button" text="UPDATE" (tap)="onSave(eventArray)"> 
        </Button>
         </StackLayout>
     </ScrollView>

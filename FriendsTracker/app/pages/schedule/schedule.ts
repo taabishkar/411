@@ -1,9 +1,9 @@
 export class Schedule {
-    DayId: Number;
-    From: Number;
-    To: Number;
-    EventDescription: String;
-    EventId: Number;
+    dayId: number;
+    from: number;
+    to: number;
+    eventDescription: string;
+    eventId: number;
 }
 
 export class ScheduleViewModel {
